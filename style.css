@@ -23,6 +23,10 @@ img {
 }
 
 /*^^^RESET^^^*/
+.main {
+    height: 100%;
+    display: grid;
+}
 
 .calc {
     display: grid;
@@ -33,6 +37,18 @@ img {
     'four five six minus'
     'one two three plus'
     'zilch zilch deci equals';
+    column-gap: 1fr;
+    row-gap: 1fr;
+    margin: 10vh auto; 
+    border: solid black;
+    border-radius: 5px;
+    height: 80vh;
+    width: 60vh;
+}
+
+.calc__button{
+    border: solid red; 
+    text-align: center;
 }
 
 .dis{grid-area: dis;}
