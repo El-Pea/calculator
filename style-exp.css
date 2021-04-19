@@ -30,11 +30,10 @@ img {
 
 .calc {
     display: grid;
-    grid-template-columns: repeat(4, 14vh);
-    grid-template-rows: repeat(6, 12vh);
-    grid-gap: 1vh 1vh;
+    grid-template-columns: repeat(4, 20fr);
+    grid-template-rows: repeat(7, 15fr);
     margin: 10vh auto; 
-    border: solid black;
+    border: solid black 1px;
     border-radius: 5px;
     height: 80vh;
     width: 60vh;
@@ -43,7 +42,9 @@ img {
 .calc__display{
     grid-column-start: 1;
     grid-column-end: 5;
-    border: solid blue;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    border: solid blue 1px;
 }
 
 .calc__zero{
@@ -52,7 +53,8 @@ img {
 }
 
 .calc__button{
-    border: solid red; 
+    border: solid red 1px; 
     text-align: center;
+    
 }
 
