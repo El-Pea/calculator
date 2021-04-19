@@ -26,6 +26,5 @@ function divide(a, b){
 }
 
 function posNeg(a){
-    return a.sign === 1 ? a.sign === -1 : a.sign === 1;
-    // needs work 
+    return a > 0 ? a * -1: Math.abs(a);
 }
