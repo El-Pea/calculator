@@ -39,6 +39,11 @@ img {
     width: 60vh;
 }
 
+.calc__elem{
+    margin: 1px;
+    border-radius: 5px;
+}
+
 .calc__display{
     grid-column-start: 1;
     grid-column-end: 5;
@@ -53,8 +58,10 @@ img {
 }
 
 .calc__button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: solid red 1px; 
     text-align: center;
-    
 }
 
