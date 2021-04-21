@@ -23,6 +23,7 @@ img {
 }
 
 /*^^^RESET^^^*/
+
 .calc {
     display: grid;
     grid-template-columns: repeat(4, 20fr);
@@ -68,6 +69,12 @@ img {
 .calc__zero{
     grid-column-start: 1;
     grid-column-end: 3;
+}
+
+/*** COLORS ***/
+
+.bkgd{
+    background-color: hsl(222, 43%, 61%);
 }
 
 .light{
