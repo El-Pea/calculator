@@ -75,7 +75,7 @@ img {
 }
 
 .darker{
-    background-color: #BDBDBD;
+    background-color: hsl(0, 0%, 85%);
 }
 
 .accent{
