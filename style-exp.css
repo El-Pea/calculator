@@ -31,8 +31,9 @@ img {
     border: solid black 1px;
     border-radius: 5px;
     height: 80vh;
-    width: 60vh;
-    /*padding: 5px;*/
+    width: 55vh;
+    padding: 1vh;
+    background-color: #2E4272;
 }
 
 .calc__display, .calc__button{
@@ -47,18 +48,19 @@ img {
     grid-column-end: 5;
     grid-row-start: 1;
     grid-row-end: 3;
-    border: solid blue 1px;
+    border: solid black 1px;
     align-items: flex-end;
     justify-content: flex-end;
     padding: 1vh;
     font-size: 9vh;
+    background-color: white;
     
 }
 
 .calc__button{
     align-items: center;
     justify-content: center;
-    border: solid red 1px; 
+    border: solid #0F3BAA 1px; 
     text-align: center;
     font-size: 4vh;
 }
@@ -68,5 +70,18 @@ img {
     grid-column-end: 3;
 }
 
+.light{
+    background-color: #FFFFFF;
+}
 
+.darker{
+    background-color: #BDBDBD;
+}
 
+.accent{
+    background-color:#FDAA00;
+}
+
+.accent-light{
+    background-color: #C8E6C9;
+}
