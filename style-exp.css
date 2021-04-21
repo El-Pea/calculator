@@ -30,8 +30,8 @@ img {
     margin: 10vh auto; 
     border: solid black 1px;
     border-radius: 5px;
-    height: 80vh;
-    width: 55vh;
+    height: 63vh;
+    width: 42vh;
     padding: 1vh;
     background-color: #2E4272;
 }
@@ -52,7 +52,7 @@ img {
     align-items: flex-end;
     justify-content: flex-end;
     padding: 1vh;
-    font-size: 9vh;
+    font-size: 7vh;
     background-color: white;
     
 }
