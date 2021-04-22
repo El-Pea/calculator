@@ -110,3 +110,13 @@ img {
 .accent-light:hover{
     background-color: #a4d6a5;
 }
+
+/***MOBILE***/
+
+@media only screen and (max-device-width: 828px) {
+    @media (hover: none) {
+        .darker:hover{color: inherit;}
+        .accent:hover{color: inherit;}
+        .accent-light:hover{color: inherit;}
+      }
+}
