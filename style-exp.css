@@ -86,9 +86,27 @@ img {
 }
 
 .accent{
-    background-color:#FDAA00;
+    background-color:#fdaa00;
 }
 
 .accent-light{
     background-color: #C8E6C9;
+}
+
+/***HOVERS***/
+
+.light:hover{
+    background-color: #e6e6e6;
+}
+
+.darker:hover{
+    background-color: #f2f2f2;
+}
+
+.accent:hover,{
+    background-color:#f0a000;
+}
+
+.accent-light:hover{
+    background-color: #a4d6a5;
 }
