@@ -6,7 +6,11 @@
 
 [TOP - The Odin Project](https://www.theodinproject.com/faq)
 
+Objective:</br>
+Mobile friendly browser calculator
+
 Next steps:</br>
-* ID CSS strategy
+* Mobile hover strategy
+* Start hooking up basic logic
 
 Takeaways:</br>
