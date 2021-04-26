@@ -23,7 +23,7 @@ function operate(operator, a, b){
     return operator(a, b);
 }
 
-let display = {
+let holder = {
     one : [],
     two : [],
 };
@@ -33,7 +33,11 @@ function updateScreen(){
     const displayDiv = document.querySelector('.calc__display');
     number.forEach((num)=>{
         num.addEventListener('click', ()=>{
-            displayDiv.textContent = num.textContent;
+            // displayDiv.textContent = num.textContent;
+            holder.one.push(num.textContent);
+            // turn holder.one into an int here? new function?
+            displayDiv.textContent = holder.one;
+            console.log(holder.one);
         });
     });
 }
