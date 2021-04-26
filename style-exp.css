@@ -54,9 +54,7 @@ img {
     justify-content: flex-end;
     padding: 1vh;
     font-size: 7vh;
-    background-color: white;
-    overflow-wrap: break-word;
-    
+    background-color: white; 
 }
 
 .calc__button{
@@ -97,7 +95,7 @@ img {
 /***HOVERS***/
 
 .light:hover{
-    background-color: #e6e6e6;
+    background-color: #d9d9d9;
 }
 
 .darker:hover{
