@@ -38,6 +38,7 @@ let stored = {
         let newArr = parseFloat(arr.join(''), 10);
         return newArr;
     },
+    operator : null,
 };
 
 function getInputGiveFloat(){
@@ -51,8 +52,12 @@ function getInputGiveFloat(){
     });
 }
 
-function calculate(){
-
+function operatorListener(){
+    const pressed = document.querySelectorAll('.op');
+    pressed.forEach((op)=>{
+        op.addEventListener('click', ()=>{stored.operator = op.id})
+    });
 }
 
-getInputGiveFloat()
+getInputGiveFloat();
+operatorListener();
