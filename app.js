@@ -23,9 +23,21 @@ function operate(operator, a, b){
     return operator(a, b);
 }
 
+function clear(){
+
+}
+
+function del(){
+
+}
+
 let holder = {
     one : [],
     two : [],
+    value : function(arr){
+        let newArr = parseFloat(arr.join(''), 10);
+        return newArr;
+    },
 };
 
 function updateScreen(){
@@ -33,26 +45,10 @@ function updateScreen(){
     const displayDiv = document.querySelector('.calc__display');
     number.forEach((num)=>{
         num.addEventListener('click', ()=>{
-            // displayDiv.textContent = num.textContent;
             holder.one.push(num.textContent);
-            // turn holder.one into an int here? new function?
-            displayDiv.textContent = holder.one;
-            console.log(holder.one);
+            displayDiv.textContent = holder.value(holder.one);
         });
     });
 }
-
-/*
-function displayThis(){
-    const number = document.querySelectorAll('.num__num');
-    const display = document.querySelector('.calc__display');
-    number.forEach((num)=>{
-        num.addEventListener('click', ()=>{
-            display.textContent = num.textContent;
-            console.log(num.textContent)
-        });
-    });
-}
-*/
 
 updateScreen();
