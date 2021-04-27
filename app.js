@@ -31,7 +31,7 @@ function del(){
 
 }
 
-let holder = {
+let stored = {
     one : [],
     two : [],
     value : function(arr){
@@ -40,15 +40,19 @@ let holder = {
     },
 };
 
-function updateScreen(){
+function getInputGiveFloat(){
     const number = document.querySelectorAll('.num__num');
     const displayDiv = document.querySelector('.calc__display');
     number.forEach((num)=>{
         num.addEventListener('click', ()=>{
-            holder.one.push(num.textContent);
-            displayDiv.textContent = holder.value(holder.one);
+            stored.one.push(num.textContent);
+            displayDiv.textContent = stored.value(stored.one);
         });
     });
 }
 
-updateScreen();
+function calculate(){
+
+}
+
+getInputGiveFloat()
