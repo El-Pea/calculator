@@ -32,9 +32,10 @@ function del(){
 }
 
 function equals(){
-    // let op = stored.makeVar(signString);
-    // let num = stored.makeFloat(stored.numString); 
-    // operate(op, num);
+    let op = stored.makeVar(stored.signString);
+    let num = stored.makeFloat(stored.numString); 
+    operate(op, num);
+    updateDisplay();
 }
 
 // stores string-input and provides methods to put them in the type expected by other functions
@@ -61,6 +62,8 @@ let stored = {
                 return clear;
             case 'del' :
                 return del;
+            case 'equals' :
+                return equals;
         }
     },
 };
