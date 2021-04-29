@@ -31,14 +31,38 @@ function del(){
 
 }
 
+function equals(){
+    let op = stored.makeVar(signString);
+    let num = stored.makeFloat(stored.numString); 
+    operate(op, num);
+}
+
+// stores string-input and provides methods to put them in the type expected by other functions
 let stored = {
-    one : [],
-    two : [],
-    value : function(arr){
-        let newArr = parseFloat(arr.join(''), 10);
-        return newArr;
+    numString : [],
+    makeFloat : function(arr){
+        let float = parseFloat(arr.join(''), 10);
+        return float;
     },
-    operator : null,
+    signString : null,
+    makeVar: function(signString){
+        switch(signString){
+            case 'add' :
+                return add;
+            case 'subtract' :
+                return subtract;
+            case 'multiply' :
+                return multiply;
+            case 'divide' :
+                return divide;
+            case 'posNeg' :
+                return posNeg;
+            case 'clear' :
+                return clear;
+            case 'del' :
+                return del;
+        }
+    },
 };
 
 function getInputGiveFloat(){
@@ -46,18 +70,19 @@ function getInputGiveFloat(){
     const displayDiv = document.querySelector('.calc__display');
     number.forEach((num)=>{
         num.addEventListener('click', ()=>{
-            stored.one.push(num.textContent);
-            displayDiv.textContent = stored.value(stored.one);
+            stored.numString.push(num.textContent);
+            displayDiv.textContent = stored.makeFloat(stored.numString);
         });
     });
 }
 
-function operatorListener(){
+function setOperator(){
     const pressed = document.querySelectorAll('.op');
     pressed.forEach((op)=>{
-        op.addEventListener('click', ()=>{stored.operator = op.id})
+        op.addEventListener('click', ()=>{stored.signString = op.id;})
+        if(op === 'equals'){equals();}
     });
 }
 
 getInputGiveFloat();
-operatorListener();
+setOperator();
