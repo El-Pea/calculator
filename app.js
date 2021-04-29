@@ -32,9 +32,9 @@ function del(){
 }
 
 function equals(){
-    let op = stored.makeVar(signString);
-    let num = stored.makeFloat(stored.numString); 
-    operate(op, num);
+    // let op = stored.makeVar(signString);
+    // let num = stored.makeFloat(stored.numString); 
+    // operate(op, num);
 }
 
 // stores string-input and provides methods to put them in the type expected by other functions
@@ -65,13 +65,18 @@ let stored = {
     },
 };
 
-function getInputGiveFloat(){
-    const number = document.querySelectorAll('.num__num');
+function updateDisplay(){
     const displayDiv = document.querySelector('.calc__display');
+    let number = stored.makeFloat(stored.numString);
+    displayDiv.textContent = number;
+}
+
+function setNumber(){
+    const number = document.querySelectorAll('.num__num');
     number.forEach((num)=>{
         num.addEventListener('click', ()=>{
             stored.numString.push(num.textContent);
-            displayDiv.textContent = stored.makeFloat(stored.numString);
+            updateDisplay();
         });
     });
 }
@@ -80,9 +85,9 @@ function setOperator(){
     const pressed = document.querySelectorAll('.op');
     pressed.forEach((op)=>{
         op.addEventListener('click', ()=>{stored.signString = op.id;})
-        if(op === 'equals'){equals();}
+        // if(op === 'equals'){equals();}
     });
 }
 
-getInputGiveFloat();
+setNumber();
 setOperator();
