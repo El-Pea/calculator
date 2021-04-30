@@ -31,13 +31,6 @@ function del(){
 
 }
 
-function equals(){
-    let op = stored.makeVar(stored.signString);
-    let num = stored.makeFloat(stored.numString); 
-    operate(op, num);
-    updateDisplay();
-}
-
 // stores string-input and provides methods to put them in the type expected by other functions
 let stored = {
     numString : [],
@@ -46,7 +39,7 @@ let stored = {
         return float;
     },
     signString : null,
-    makeVar: function(signString){
+    makeVar : function(signString){
         switch(signString){
             case 'add' :
                 return add;
@@ -62,8 +55,6 @@ let stored = {
                 return clear;
             case 'del' :
                 return del;
-            case 'equals' :
-                return equals;
         }
     },
 };
@@ -92,5 +83,17 @@ function setOperator(){
     });
 }
 
+function equals(){
+    let equalsButton = document.querySelector('#equals');
+    equalsButton.addEventListener('click', ()=>{
+        let op = stored.makeVar(stored.signString);
+        let num = stored.makeFloat(stored.numString);
+        console.log(op, num); 
+        //operate(op, num);
+        //updateDisplay();
+    });  
+}
+
 setNumber();
 setOperator();
+equals();
