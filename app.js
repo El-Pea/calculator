@@ -70,7 +70,7 @@ function updateDisplay(nextNumber){
     }
 }
 
-function setNumber(){
+function numKeyListner(){
     const number = document.querySelectorAll('.num__num');
     number.forEach((num)=>{
         num.addEventListener('click', ()=>{
@@ -80,13 +80,18 @@ function setNumber(){
     });
 }
 
-function setOperator(){
+// sets operator and first value
+function opKeyListener(){
     const pressed = document.querySelectorAll('.op');
     pressed.forEach((op)=>{
-        op.addEventListener('click', ()=>{stored.signString = op.id;})
+        op.addEventListener('click', ()=>{stored.signString = op.id;});
+        stored.currentValue = stored.makeFloat(stored.numString);
     });
 }
 
+
+
+/*
 function equals(){
     let equalsButton = document.querySelector('#equals');
         equalsButton.addEventListener('click', ()=>{
@@ -96,7 +101,8 @@ function equals(){
             updateDisplay(stored.currentValue);
         });  
 }
+*/
 
-setNumber();
-setOperator();
-equals();
+numKeyListner();
+opKeyListener();
+// equals();
