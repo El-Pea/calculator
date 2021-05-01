@@ -87,10 +87,11 @@ function equals(){
     let equalsButton = document.querySelector('#equals');
     equalsButton.addEventListener('click', ()=>{
         let op = stored.makeVar(stored.signString);
+        //let op = stored.signString;
         let num = stored.makeFloat(stored.numString);
-        console.log(op, num); 
-        //operate(op, num);
-        //updateDisplay();
+        console.log(op, num);
+        operate(op, num);
+        updateDisplay();
     });  
 }
 
