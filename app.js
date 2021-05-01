@@ -24,7 +24,7 @@ function operate(operator, a, b){
 }
 
 function clear(){
-
+    
 }
 
 function del(){
@@ -39,7 +39,7 @@ let stored = {
         return float;
     },
     signString : null,
-    makeVar : function(signString){
+    makeArg : function(signString){
         switch(signString){
             case 'add' :
                 return add;
@@ -57,12 +57,17 @@ let stored = {
                 return del;
         }
     },
+    currentValue : 0,
 };
 
-function updateDisplay(){
+function updateDisplay(nextNumber){
     const displayDiv = document.querySelector('.calc__display');
-    let number = stored.makeFloat(stored.numString);
-    displayDiv.textContent = number;
+    if(!nextNumber){
+        let number = stored.makeFloat(stored.numString);
+        displayDiv.textContent = number;
+    }else{
+        displayDiv.textContent = nextNumber;
+    }
 }
 
 function setNumber(){
@@ -79,20 +84,17 @@ function setOperator(){
     const pressed = document.querySelectorAll('.op');
     pressed.forEach((op)=>{
         op.addEventListener('click', ()=>{stored.signString = op.id;})
-        // if(op === 'equals'){equals();}
     });
 }
 
 function equals(){
     let equalsButton = document.querySelector('#equals');
-    equalsButton.addEventListener('click', ()=>{
-        let op = stored.makeVar(stored.signString);
-        //let op = stored.signString;
-        let num = stored.makeFloat(stored.numString);
-        console.log(op, num);
-        operate(op, num);
-        updateDisplay();
-    });  
+        equalsButton.addEventListener('click', ()=>{
+            let op = stored.makeArg(stored.signString);
+            let num = stored.makeFloat(stored.numString);
+            stored.currentValue = operate(op, num)
+            updateDisplay(stored.currentValue);
+        });  
 }
 
 setNumber();
