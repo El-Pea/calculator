@@ -60,11 +60,14 @@ let stored = {
     float : 0,
 };
 
-function updateDisplay(){
+function updateDisplay(calculated){
     const displayDiv = document.querySelector('.calc__display');
+    if(!calculated){
         let number = stored.makeFloat(stored.numString);
         displayDiv.textContent = number;
-    
+    }else{
+        displayDiv.textContent = calculated;
+    }
 }
 
 function numKeyListner(){
@@ -77,23 +80,24 @@ function numKeyListner(){
     });
 }
 
+// clearing numString in here keeps equals from concatenating num1 and num2 in its block
 function opKeyListener(){
     const pressed = document.querySelectorAll('.op');
     pressed.forEach((op)=>{
         op.addEventListener('click', ()=>{stored.signString = op.id;
         stored.float = stored.makeFloat(stored.numString);
+        stored.numString = [];
         })  
     });
 }
 
-// this is concatenating num2 to num1
 function equals(){
     let equalsButton = document.querySelector('#equals');
         equalsButton.addEventListener('click', ()=>{
             let op = stored.makeArg(stored.signString);
             let num1 = stored.float;
             let num2 = stored.makeFloat(stored.numString);
-            console.log(operate(op, num1, num2));
+            updateDisplay(operate(op, num1, num2));
         });  
 }
 
@@ -112,13 +116,5 @@ init();
 */
 
 /*
-function updateDisplay(nextNumber){
-    const displayDiv = document.querySelector('.calc__display');
-    if(!nextNumber){
-        let number = stored.makeFloat(stored.numString);
-        displayDiv.textContent = number;
-    }else{
-        displayDiv.textContent = nextNumber;
-    }
-}
+
 */
