@@ -57,7 +57,7 @@ let stored = {
                 return del;
         }
     },
-    currentValue : 0,
+    float : 0,
 };
 
 function updateDisplay(){
@@ -81,25 +81,34 @@ function opKeyListener(){
     const pressed = document.querySelectorAll('.op');
     pressed.forEach((op)=>{
         op.addEventListener('click', ()=>{stored.signString = op.id;
-        stored.currentValue = stored.makeFloat(stored.numString);
+        stored.float = stored.makeFloat(stored.numString);
         })  
     });
 }
 
-numKeyListner();
-opKeyListener();
-// equals();
-
-/*
+// this is concatenating num2 to num1
 function equals(){
     let equalsButton = document.querySelector('#equals');
         equalsButton.addEventListener('click', ()=>{
             let op = stored.makeArg(stored.signString);
-            let num = stored.makeFloat(stored.numString);
-            stored.currentValue = operate(op, num)
-            updateDisplay(stored.currentValue);
+            let num1 = stored.float;
+            let num2 = stored.makeFloat(stored.numString);
+            console.log(operate(op, num1, num2));
         });  
 }
+
+function init(){
+    document.querySelector('.calc__display').textContent = 0;
+    numKeyListner();
+    opKeyListener();
+    equals();
+}
+
+init();
+// 
+
+/*
+
 */
 
 /*
