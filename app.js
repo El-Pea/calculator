@@ -60,14 +60,11 @@ let stored = {
     currentValue : 0,
 };
 
-function updateDisplay(nextNumber){
+function updateDisplay(){
     const displayDiv = document.querySelector('.calc__display');
-    if(!nextNumber){
         let number = stored.makeFloat(stored.numString);
         displayDiv.textContent = number;
-    }else{
-        displayDiv.textContent = nextNumber;
-    }
+    
 }
 
 function numKeyListner(){
@@ -80,16 +77,18 @@ function numKeyListner(){
     });
 }
 
-// sets operator and first value
 function opKeyListener(){
     const pressed = document.querySelectorAll('.op');
     pressed.forEach((op)=>{
-        op.addEventListener('click', ()=>{stored.signString = op.id;});
+        op.addEventListener('click', ()=>{stored.signString = op.id;
         stored.currentValue = stored.makeFloat(stored.numString);
+        })  
     });
 }
 
-
+numKeyListner();
+opKeyListener();
+// equals();
 
 /*
 function equals(){
@@ -103,6 +102,14 @@ function equals(){
 }
 */
 
-numKeyListner();
-opKeyListener();
-// equals();
+/*
+function updateDisplay(nextNumber){
+    const displayDiv = document.querySelector('.calc__display');
+    if(!nextNumber){
+        let number = stored.makeFloat(stored.numString);
+        displayDiv.textContent = number;
+    }else{
+        displayDiv.textContent = nextNumber;
+    }
+}
+*/
