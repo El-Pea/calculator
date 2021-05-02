@@ -24,11 +24,21 @@ function operate(operator, a, b){
 }
 
 function clear(){
+    const clear = document.querySelector('#clear');
+    clear.addEventListener('click', ()=>{
+        stored.numString = [];
+        stored.signString = null;
+        document.querySelector('.calc__display').textContent = 0;
+    });
     
+
 }
 
 function del(){
-
+    const deleteThis = document.querySelector('#del');
+    deleteThis.addEventListener('click', ()=>{
+        // deleted
+    });  
 }
 
 // stores string-input and provides methods to put them in the type expected by other functions
@@ -51,8 +61,6 @@ let stored = {
                 return divide;
             case 'posNeg' :
                 return posNeg;
-            case 'clear' :
-                return clear;
             case 'del' :
                 return del;
         }
@@ -70,7 +78,7 @@ function updateDisplay(calculated){
     }
 }
 
-function numKeyListner(){
+function numKeyListener(){
     const number = document.querySelectorAll('.num__num');
     number.forEach((num)=>{
         num.addEventListener('click', ()=>{
@@ -103,9 +111,10 @@ function equals(){
 
 function init(){
     document.querySelector('.calc__display').textContent = 0;
-    numKeyListner();
+    numKeyListener();
     opKeyListener();
     equals();
+    clear();
 }
 
 init();

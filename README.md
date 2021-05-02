@@ -14,3 +14,4 @@ Next steps:</br>
 * Start hooking up basic logic
 
 Takeaways:</br>
+* I decided to give non operators (AC, DEL, =, ...) listeners by ID because they are not arithmetic operators, and stored.makeArg depends on the last operator key press
