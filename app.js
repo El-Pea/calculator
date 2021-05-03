@@ -30,14 +30,15 @@ function clear(){
         stored.signString = null;
         document.querySelector('.calc__display').textContent = 0;
     });
-    
 
 }
 
+// double check
 function del(){
     const deleteThis = document.querySelector('#del');
     deleteThis.addEventListener('click', ()=>{
-        // deleted
+        stored.numString = ['0'];  
+        display();
     });  
 }
 
@@ -66,13 +67,13 @@ let stored = {
     float : 0,
 };
 
-function updateDisplay(calculated){
+function display(result){
     const displayDiv = document.querySelector('.calc__display');
-    if(!calculated){
+    if(!result){
         let number = stored.makeFloat(stored.numString);
         displayDiv.textContent = number;
     }else{
-        displayDiv.textContent = calculated;
+        displayDiv.textContent = result;
     }
 }
 
@@ -81,7 +82,7 @@ function numKeyListener(){
     number.forEach((num)=>{
         num.addEventListener('click', ()=>{
             stored.numString.push(num.textContent);
-            updateDisplay();
+            display();
         });
     });
 }
@@ -93,7 +94,7 @@ function opKeyListener(){
         op.addEventListener('click', ()=>{stored.signString = op.id;
         stored.float = stored.makeFloat(stored.numString);
         stored.numString = [];
-        })  
+        });  
     });
 }
 
@@ -103,16 +104,17 @@ function equals(){
             let op = stored.makeArg(stored.signString);
             let num1 = stored.float;
             let num2 = stored.makeFloat(stored.numString);
-            updateDisplay(operate(op, num1, num2));
+            display(operate(op, num1, num2));
         });  
 }
 
 function init(){
-    document.querySelector('.calc__display').textContent = 0;
+    // document.querySelector('.calc__display').textContent = 0;
     numKeyListener();
     opKeyListener();
     equals();
     clear();
+    del();
 }
 
 init();
