@@ -64,24 +64,10 @@ let stored = {
                 return posNeg;
         }
     },
-    float : 0,
+    float1 : undefined,
+    float2 : undefined,
+    opCount : 0,
 };
-
-/*
-function display(result){
-    const displayDiv = document.querySelector('.calc__display');
-    if(!result && stored.numString === undefined){
-        const zero = stored.numString[0] = '0';
-        displayDiv.textContent = stored.makeFloat(zero);
-    }
-    else if(!result){
-        let number = stored.makeFloat(stored.numString);
-        displayDiv.textContent = number;
-    }else{
-        displayDiv.textContent = result;
-    }
-}
-*/
 
 function display(result){
     const displayDiv = document.querySelector('.calc__display');
@@ -107,22 +93,31 @@ function numKeyListener(){
 function opKeyListener(){
     const pressed = document.querySelectorAll('.op');
     pressed.forEach((op)=>{
-        op.addEventListener('click', ()=>{stored.signString = op.id;
-        stored.float = stored.makeFloat(stored.numString);
+        op.addEventListener('click', ()=>{
+        stored.signString = op.id;
+        stored.opCount++
+        if(stored.opCount % 2 === 1){
+            stored.float1 = stored.makeFloat(stored.numString);
+        } else {
+            stored.float2 = stored.makeFloat(stored.numString);
+            equals();
+        }
         stored.numString = [];
         });  
     });
 }
 
 function equals(){
-    let equalsButton = document.querySelector('#equals');
-        equalsButton.addEventListener('click', ()=>{
+    //let equalsButton = document.querySelector('#equals');
+        //equalsButton.addEventListener('click', ()=>{
+            if(typeof stored.float2 === 'undefined'){stored.float2 = stored.makeFloat(stored.numString)};
+
             let op = stored.makeArg(stored.signString);
-            let num1 = stored.float;
-            let num2 = stored.makeFloat(stored.numString);
+            let num1 = stored.float1;
+            let num2 = stored.float2;
             display(operate(op, num1, num2));
-            stored.float = operate(op, num1, num2)
-        });  
+            // stored.float1 = operate(op, num1, num2)
+        //});  
 }
 
 function init(){
@@ -130,7 +125,7 @@ function init(){
     numKeyListener();
     opKeyListener();
     display();
-    equals();
+    // equals();
     clear();
     del();
 }
