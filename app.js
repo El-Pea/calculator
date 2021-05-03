@@ -26,11 +26,12 @@ function operate(operator, a, b){
 function clear(){
     const clear = document.querySelector('#clear');
     clear.addEventListener('click', ()=>{
-        stored.numString = [];
+        stored.numString = [0];
         stored.signString = null;
+        stored.float1 = undefined;
+        stored.answer = undefined;
         document.querySelector('.calc__display').textContent = 0;
     });
-
 }
 
 // double check
@@ -65,8 +66,7 @@ let stored = {
         }
     },
     float1 : undefined,
-    float2 : undefined,
-    opCount : 0,
+    answer : undefined,
 };
 
 function display(result){
@@ -94,38 +94,39 @@ function opKeyListener(){
     const pressed = document.querySelectorAll('.op');
     pressed.forEach((op)=>{
         op.addEventListener('click', ()=>{
-        stored.signString = op.id;
-        stored.opCount++
-        if(stored.opCount % 2 === 1){
+            stored.signString = op.id;
             stored.float1 = stored.makeFloat(stored.numString);
-        } else {
-            stored.float2 = stored.makeFloat(stored.numString);
-            equals();
-        }
-        stored.numString = [];
+            stored.numString = [];
         });  
     });
 }
 
 function equals(){
-    //let equalsButton = document.querySelector('#equals');
-        //equalsButton.addEventListener('click', ()=>{
-            if(typeof stored.float2 === 'undefined'){stored.float2 = stored.makeFloat(stored.numString)};
+    let op = stored.makeArg(stored.signString);
+    let num1 = undefined;
+    if(typeof stored.answer === 'undefined'){
+        num1 = stored.float1;
+    }else{
+        num1 = stored.answer;
+    }
+    let num2 = stored.makeFloat(stored.numString);
+    stored.answer = operate(op, num1, num2); 
+    display(stored.answer);
+}
 
-            let op = stored.makeArg(stored.signString);
-            let num1 = stored.float1;
-            let num2 = stored.float2;
-            display(operate(op, num1, num2));
-            // stored.float1 = operate(op, num1, num2)
-        //});  
+function equalsListener(){
+    let equalsButton = document.querySelector('#equals');
+        equalsButton.addEventListener('click', ()=>{
+            equals();
+    });
 }
 
 function init(){
     // document.querySelector('.calc__display').textContent = 0;
+    display();
     numKeyListener();
     opKeyListener();
-    display();
-    // equals();
+    equalsListener();
     clear();
     del();
 }

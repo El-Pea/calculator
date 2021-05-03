@@ -9,7 +9,7 @@
 Objective:</br>
 Mobile friendly browser calculator
 
-Next Objectives:</br>
+Next Features:</br>
 * Handle long numbers
     * ID largest reasonable number
     * ID what to do when that limit is reached
@@ -18,6 +18,9 @@ Next Objectives:</br>
 * ~~Make equals do the last operation and value entered~~
 * Make every operator press but the first equals() and display() until AC
 * Make posNeg equals() when pressed
+
+Bugs</br>
+* Answers that equal 0 do not update display
 
 Takeaways:</br>
 * I decided to give non operators (AC, DEL, =, ...) listeners by ID because they are not arithmetic operators, and stored.makeArg depends on the last operator key press
