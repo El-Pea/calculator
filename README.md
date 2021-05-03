@@ -9,9 +9,14 @@
 Objective:</br>
 Mobile friendly browser calculator
 
-Next steps:</br>
-* Mobile hover strategy
-* Start hooking up basic logic
+Next Objectives:</br>
+* Handle long numbers
+    * ID largest reasonable number
+    * ID what to do when that limit is reached
+* Make DEL functional
+* Make '.' functional
+* Make equals do the last operation and value entered
+
 
 Takeaways:</br>
 * I decided to give non operators (AC, DEL, =, ...) listeners by ID because they are not arithmetic operators, and stored.makeArg depends on the last operator key press

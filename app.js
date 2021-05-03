@@ -61,8 +61,6 @@ let stored = {
                 return divide;
             case 'posNeg' :
                 return posNeg;
-            case 'del' :
-                return del;
         }
     },
     float : 0,
