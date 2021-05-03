@@ -121,6 +121,7 @@ function equals(){
             let num1 = stored.float;
             let num2 = stored.makeFloat(stored.numString);
             display(operate(op, num1, num2));
+            stored.float = operate(op, num1, num2)
         });  
 }
 

@@ -15,7 +15,8 @@ Next Objectives:</br>
     * ID what to do when that limit is reached
 * Make DEL functional
 * Make '.' functional
-* Make equals do the last operation and value entered
+* ~~Make equals do the last operation and value entered~~
+* Make every operator press but the first equals() and display() until AC
 * Make posNeg equals() when pressed
 
 Takeaways:</br>
