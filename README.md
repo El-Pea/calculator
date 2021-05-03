@@ -16,7 +16,7 @@ Next Objectives:</br>
 * Make DEL functional
 * Make '.' functional
 * Make equals do the last operation and value entered
-
+* Make posNeg equals() when pressed
 
 Takeaways:</br>
 * I decided to give non operators (AC, DEL, =, ...) listeners by ID because they are not arithmetic operators, and stored.makeArg depends on the last operator key press

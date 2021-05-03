@@ -44,7 +44,7 @@ function del(){
 
 // stores string-input and provides methods to put them in the type expected by other functions
 let stored = {
-    numString : [],
+    numString : ['0'],
     makeFloat : function(arr){
         let float = parseFloat(arr.join(''), 10);
         return float;
@@ -66,6 +66,22 @@ let stored = {
     },
     float : 0,
 };
+
+/*
+function display(result){
+    const displayDiv = document.querySelector('.calc__display');
+    if(!result && stored.numString === undefined){
+        const zero = stored.numString[0] = '0';
+        displayDiv.textContent = stored.makeFloat(zero);
+    }
+    else if(!result){
+        let number = stored.makeFloat(stored.numString);
+        displayDiv.textContent = number;
+    }else{
+        displayDiv.textContent = result;
+    }
+}
+*/
 
 function display(result){
     const displayDiv = document.querySelector('.calc__display');
@@ -112,6 +128,7 @@ function init(){
     // document.querySelector('.calc__display').textContent = 0;
     numKeyListener();
     opKeyListener();
+    display();
     equals();
     clear();
     del();
