@@ -20,8 +20,8 @@ Next Features:</br>
 6. Make posNeg equals() when pressed
 
 Bugs</br>
-# Answers that equal 0 do not update display
-# Figure out if calling equals in opKeyListener is the right move to implement Feature #5
+* Answers that equal 0 do not update display
+* Figure out if calling equals in opKeyListener is the right move to implement Feature #5
 
 Takeaways:</br>
 * I decided to give non operators (AC, DEL, =, ...) listeners by ID because they are not arithmetic operators, and stored.makeArg depends on the last operator key press
