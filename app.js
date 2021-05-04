@@ -1,3 +1,5 @@
+// @ts-check
+
 function add(a, b){
     return a + b;
 }
@@ -30,6 +32,7 @@ function clear(){
         stored.signString = null;
         stored.float1 = undefined;
         stored.answer = undefined;
+        stored.opCount = 0;
         document.querySelector('.calc__display').textContent = 0;
     });
 }
@@ -95,7 +98,7 @@ function opKeyListener(){
     const pressed = document.querySelectorAll('.op');
     pressed.forEach((op)=>{
         op.addEventListener('click', ()=>{
-            // if(stored.opCount > 1){equals();}
+            if(stored.opCount > 0){equals();}
             stored.signString = op.id;
             stored.float1 = stored.makeFloat(stored.numString);
             stored.opCount++
@@ -115,12 +118,14 @@ function equals(){
     let num2 = stored.makeFloat(stored.numString);
     stored.answer = operate(op, num1, num2); 
     display(stored.answer);
+    
 }
 
 function equalsListener(){
     let equalsButton = document.querySelector('#equals');
         equalsButton.addEventListener('click', ()=>{
             equals();
+            stored.opCount = 0;
     });
 }
 

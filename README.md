@@ -16,12 +16,12 @@ Next Features:</br>
 2. Make DEL functional
 3. Make '.' functional
 4. ~~Make equals do the last operation and value entered~~
-5. Make every operator press but the first equals() and display() until AC
+5. ~~Make every operator press but the first equals() and display() until AC~~
 6. Make posNeg equals() when pressed
 
 Bugs</br>
 * Answers that equal 0 do not update display
-* Figure out if calling equals in opKeyListener is the right move to implement Feature #5
+* ~~Figure out if calling equals in opKeyListener is the right move to implement Feature #5~~
 
 Takeaways:</br>
 * I decided to give non operators (AC, DEL, =, ...) listeners by ID because they are not arithmetic operators, and stored.makeArg depends on the last operator key press
