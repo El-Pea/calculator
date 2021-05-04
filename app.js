@@ -67,6 +67,7 @@ let stored = {
     },
     float1 : undefined,
     answer : undefined,
+    opCount : 0,
 };
 
 function display(result){
@@ -94,9 +95,11 @@ function opKeyListener(){
     const pressed = document.querySelectorAll('.op');
     pressed.forEach((op)=>{
         op.addEventListener('click', ()=>{
+            // if(stored.opCount > 1){equals();}
             stored.signString = op.id;
             stored.float1 = stored.makeFloat(stored.numString);
-            stored.numString = [];
+            stored.opCount++
+            stored.numString = [];            
         });  
     });
 }
