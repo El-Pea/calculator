@@ -10,14 +10,14 @@ Objective:</br>
 Mobile friendly browser calculator
 
 Next Features:</br>
-# Handle long numbers
+1. Handle long numbers
     * ID largest reasonable number
     * ID what to do when that limit is reached
-# Make DEL functional
-# Make '.' functional
-# ~~Make equals do the last operation and value entered~~
-# Make every operator press but the first equals() and display() until AC
-# Make posNeg equals() when pressed
+2. Make DEL functional
+3. Make '.' functional
+4. ~~Make equals do the last operation and value entered~~
+5. Make every operator press but the first equals() and display() until AC
+6. Make posNeg equals() when pressed
 
 Bugs</br>
 # Answers that equal 0 do not update display
