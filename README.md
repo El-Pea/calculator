@@ -21,6 +21,7 @@ Next Features:</br>
 
 Bugs</br>
 * Answers that equal 0 do not update display
+* Hard for users to tell if it is working when the number they are operating by is also the answer. Add delay when screen updates?
 * ~~Figure out if calling equals in opKeyListener is the right move to implement Feature #5~~
 
 Takeaways:</br>
