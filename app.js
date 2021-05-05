@@ -133,24 +133,8 @@ function equals(){
         stored.answer = 'Error';
         stored.error = true;
     };
-    display(stored.answer); 
+    display(stored.answer.toString()); 
 }
-
-/*
-function equals(){
-    let op = stored.makeArg(stored.signString);
-    let num1 = undefined;
-    if(typeof stored.answer === 'undefined'){
-        num1 = stored.float1;
-    }else{
-        num1 = stored.answer;
-    }
-    let num2 = stored.makeFloat(stored.numString);
-    stored.answer = operate(op, num1, num2); 
-    display(stored.answer);
-    
-}
-*/
 
 function equalsListener(){
     let equalsButton = document.querySelector('#equals');
