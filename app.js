@@ -71,12 +71,13 @@ let stored = {
     float1 : undefined,
     answer : undefined,
     opCount : 0,
+    opPressed : false,
 };
 
 function display(result){
     const displayDiv = document.querySelector('.calc__display');
     if(!result){
-        let number = stored.makeFloat(stored.numString);
+        let number = stored.makeFloat(stored.numString).toString();
         displayDiv.textContent = number;
     }else{
         displayDiv.textContent = result;
@@ -98,10 +99,11 @@ function opKeyListener(){
     const pressed = document.querySelectorAll('.op');
     pressed.forEach((op)=>{
         op.addEventListener('click', ()=>{
-            if(stored.opCount > 0){equals();}
+            if(stored.opCount > 0 && stored.opPressed === true){equals();}
             stored.signString = op.id;
             stored.float1 = stored.makeFloat(stored.numString);
             stored.opCount++
+            stored.opPressed = true;
             stored.numString = [];            
         });  
     });
