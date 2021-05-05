@@ -31,6 +31,7 @@ function allClear(){
         stored.float1 = undefined;
         stored.answer = undefined;
         stored.opCount = 0;
+        stored.error = false;
         document.querySelector('.calc__display').textContent = '0';
     });
 }
@@ -70,6 +71,7 @@ let stored = {
     answer : undefined,
     opCount : 0,
     numPressed : false,
+    error : false,
     
 };
 
@@ -87,9 +89,11 @@ function numKeyListener(){
     const number = document.querySelectorAll('.num__num');
     number.forEach((num)=>{
         num.addEventListener('click', ()=>{
-            stored.numString.push(num.textContent);
-            stored.numPressed = true;
-            display();
+            if(stored.error === false){
+                stored.numString.push(num.textContent);
+                stored.numPressed = true;
+                display();
+            }; 
         });
     });
 }
@@ -99,12 +103,14 @@ function opKeyListener(){
     const pressed = document.querySelectorAll('.op');
     pressed.forEach((op)=>{
         op.addEventListener('click', ()=>{
-            if(stored.opCount > 0 && stored.numPressed === true){equals();}
-            if(typeof stored.numString[0] === 'string'){stored.float1 = stored.makeFloat(stored.numString);}
-            stored.numPressed = false;
-            stored.signString = op.id;
-            stored.opCount++
-            stored.numString = [];            
+            if(stored.error === false){
+                if(stored.opCount > 0 && stored.numPressed === true){equals();}
+                if(typeof stored.numString[0] === 'string'){stored.float1 = stored.makeFloat(stored.numString);}
+                stored.numPressed = false;
+                stored.signString = op.id;
+                stored.opCount++
+                stored.numString = [];
+            };             
         });  
     });
 }
@@ -124,6 +130,7 @@ function equals(){
         stored.answer = operate(op, num1, num2); 
     }else{
         stored.answer = 'Error';
+        stored.error = true;
     };
     display(stored.answer);
     
