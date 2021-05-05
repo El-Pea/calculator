@@ -27,6 +27,7 @@ Bugs</br>
 5. ~~Pressing equals with one number in an operation that expects two displays NaN~~
 6. ~~Pressing an operator than equals NaN~~
 7. ~~Pressing two operators will not use the last one~~
+8. posNeg displays error
 
 Considerations:</br>
 * I decided to give non operators (AC, DEL, =, ...) listeners by ID because they are not arithmetic operators, and stored.makeArg depends on the last operator key press
