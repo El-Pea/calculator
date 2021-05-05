@@ -25,7 +25,7 @@ function operate(operator, a, b){
     return operator(a, b);
 }
 
-function clear(){
+function allClear(){
     const clear = document.querySelector('#clear');
     clear.addEventListener('click', ()=>{
         stored.numString = ['0'];
@@ -71,7 +71,8 @@ let stored = {
     float1 : undefined,
     answer : undefined,
     opCount : 0,
-    opPressed : false,
+    numPressed : false,
+    
 };
 
 function display(result){
@@ -89,6 +90,7 @@ function numKeyListener(){
     number.forEach((num)=>{
         num.addEventListener('click', ()=>{
             stored.numString.push(num.textContent);
+            stored.numPressed = true;
             display();
         });
     });
@@ -99,11 +101,11 @@ function opKeyListener(){
     const pressed = document.querySelectorAll('.op');
     pressed.forEach((op)=>{
         op.addEventListener('click', ()=>{
-            if(stored.opCount > 0 && stored.opPressed === true){equals();}
+            if(stored.opCount > 0 && stored.numPressed === true){equals();}
+            stored.numPressed = false;
             stored.signString = op.id;
             stored.float1 = stored.makeFloat(stored.numString);
             stored.opCount++
-            stored.opPressed = true;
             stored.numString = [];            
         });  
     });
@@ -137,7 +139,7 @@ function init(){
     numKeyListener();
     opKeyListener();
     equalsListener();
-    clear();
+    allClear();
     del();
 }
 
