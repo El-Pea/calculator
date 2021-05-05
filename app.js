@@ -94,7 +94,7 @@ function numKeyListener(){
     });
 }
 
-// clearing numString in here keeps equals from concatenating num1 and num2 in its block
+// clearing numString in here keeps equals() from concatenating num1 and num2 in its block
 function opKeyListener(){
     const pressed = document.querySelectorAll('.op');
     pressed.forEach((op)=>{
@@ -112,6 +112,28 @@ function opKeyListener(){
 function equals(){
     let op = stored.makeArg(stored.signString);
     let num1 = undefined;
+    let num2 = undefined;
+    if(stored.answer === 'Error'){stored.answer = undefined}
+    if(typeof stored.answer === 'undefined'){
+        num1 = stored.float1;
+    }else{
+        num1 = stored.answer;
+    };
+    if(typeof stored.numString[0] === 'string'){
+        num2 = stored.makeFloat(stored.numString);
+        stored.answer = operate(op, num1, num2); 
+    }else{
+        stored.answer = 'Error';
+    };
+    display(stored.answer);
+    
+    
+}
+
+/*
+function equals(){
+    let op = stored.makeArg(stored.signString);
+    let num1 = undefined;
     if(typeof stored.answer === 'undefined'){
         num1 = stored.float1;
     }else{
@@ -122,6 +144,7 @@ function equals(){
     display(stored.answer);
     
 }
+*/
 
 function equalsListener(){
     let equalsButton = document.querySelector('#equals');
@@ -139,6 +162,7 @@ function init(){
     equalsListener();
     allClear();
     del();
+
 }
 
 init();
