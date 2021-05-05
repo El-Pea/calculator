@@ -20,7 +20,7 @@ Next Features:</br>
 6. Make posNeg equals() when pressed
 
 Bugs</br>
-1. Answers that equal 0 do not update display
+1. ~~Answers that equal 0 do not update display~~
 2. Hard for users to tell if it is working when the number they are operating by is also the answer. Add delay when screen updates?
 3. ~~Figure out if calling equals in opKeyListener is the right move to implement Feature #5~~
 4. ~~Pressing two operators in a row displays NaN because opCount is 2 so equals is invoked~~

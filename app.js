@@ -23,19 +23,6 @@ function operate(operator, a, b){
     return operator(a, b);
 }
 
-function allClear(){
-    const clear = document.querySelector('#clear');
-    clear.addEventListener('click', ()=>{
-        stored.numString = ['0'];
-        stored.signString = null;
-        stored.float1 = undefined;
-        stored.answer = undefined;
-        stored.opCount = 0;
-        stored.error = false;
-        document.querySelector('.calc__display').textContent = '0';
-    });
-}
-
 // double check
 function del(){
     const deleteThis = document.querySelector('#del');
@@ -75,47 +62,6 @@ let stored = {
     
 };
 
-function display(result){
-    const displayDiv = document.querySelector('.calc__display');
-    if(!result){
-        let number = stored.makeFloat(stored.numString).toString();
-        displayDiv.textContent = number;
-    }else{
-        displayDiv.textContent = result;
-    }
-}
-
-function numKeyListener(){
-    const number = document.querySelectorAll('.num__num');
-    number.forEach((num)=>{
-        num.addEventListener('click', ()=>{
-            if(stored.error === false){
-                stored.numString.push(num.textContent);
-                stored.numPressed = true;
-                display();
-            }; 
-        });
-    });
-}
-
-// clearing numString in here keeps equals() from concatenating num1 and num2 in its block
-function opKeyListener(){
-    const pressed = document.querySelectorAll('.op');
-    pressed.forEach((op)=>{
-        op.addEventListener('click', ()=>{
-            if(stored.error === false){
-                if(stored.opCount > 0 && stored.numPressed === true){equals();}
-                if(typeof stored.numString[0] === 'string'){stored.float1 = stored.makeFloat(stored.numString);}
-                stored.numPressed = false;
-                stored.signString = op.id;
-                stored.opCount++
-                stored.numString = [];
-                if(op.id === 'posNeg'){equals();}
-            };             
-        });  
-    });
-}
-
 function equals(){
     let op = stored.makeArg(stored.signString);
     let num1 = undefined;
@@ -136,6 +82,49 @@ function equals(){
     display(stored.answer.toString()); 
 }
 
+function allClear(){
+    const clear = document.querySelector('#clear');
+    clear.addEventListener('click', ()=>{
+        stored.numString = ['0'];
+        stored.signString = null;
+        stored.float1 = undefined;
+        stored.answer = undefined;
+        stored.opCount = 0;
+        stored.error = false;
+        document.querySelector('.calc__display').textContent = '0';
+    });
+}
+
+function opKeyListener(){
+    const pressed = document.querySelectorAll('.op');
+    pressed.forEach((op)=>{
+        op.addEventListener('click', ()=>{
+            if(stored.error === false){
+                if(stored.opCount > 0 && stored.numPressed === true){equals();}
+                if(typeof stored.numString[0] === 'string'){stored.float1 = stored.makeFloat(stored.numString);}
+                stored.numPressed = false;
+                stored.signString = op.id;
+                stored.opCount++
+                stored.numString = [];
+                if(op.id === 'posNeg'){equals();}
+            };             
+        });  
+    });
+}
+
+function numKeyListener(){
+    const number = document.querySelectorAll('.num__num');
+    number.forEach((num)=>{
+        num.addEventListener('click', ()=>{
+            if(stored.error === false){
+                stored.numString.push(num.textContent);
+                stored.numPressed = true;
+                display();
+            }; 
+        });
+    });
+}
+
 function equalsListener(){
     let equalsButton = document.querySelector('#equals');
         equalsButton.addEventListener('click', ()=>{
@@ -143,6 +132,18 @@ function equalsListener(){
             stored.opCount = 0;
     });
 }
+
+function display(result){
+    const displayDiv = document.querySelector('.calc__display');
+    if(!result){
+        let number = stored.makeFloat(stored.numString).toString();
+        displayDiv.textContent = number;
+    }else{
+        displayDiv.textContent = result;
+    }
+}
+
+// clearing numString in here keeps equals() from concatenating num1 and num2 in its block
 
 function init(){
     // document.querySelector('.calc__display').textContent = 0;
