@@ -110,6 +110,7 @@ function opKeyListener(){
                 stored.signString = op.id;
                 stored.opCount++
                 stored.numString = [];
+                if(op.id === 'posNeg'){equals();}
             };             
         });  
     });
@@ -132,9 +133,7 @@ function equals(){
         stored.answer = 'Error';
         stored.error = true;
     };
-    display(stored.answer);
-    
-    
+    display(stored.answer); 
 }
 
 /*
@@ -164,12 +163,11 @@ function equalsListener(){
 function init(){
     // document.querySelector('.calc__display').textContent = 0;
     display();
+    allClear();
     numKeyListener();
     opKeyListener();
     equalsListener();
-    allClear();
     del();
-
 }
 
 init();

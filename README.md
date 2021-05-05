@@ -33,3 +33,4 @@ Considerations:</br>
 * I decided to give non operators (AC, DEL, =, ...) listeners by ID because they are not arithmetic operators, and stored.makeArg depends on the last operator key press
 * Should display be a number field instead of a div?
 * How will DEL, +/-, and '.' deal with current error handling scheme? opKeys and numKeys are disabled until AC is pressed, but these are still active
+* To the last point, can my listeners go into an if(stored.error = false){} block?
