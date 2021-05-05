@@ -7,7 +7,7 @@
 [TOP - The Odin Project](https://www.theodinproject.com/faq)
 
 Objective:</br>
-Mobile friendly browser calculator
+Mobile friendly browser calculator that evaluates pairs of numbers
 
 Next Features:</br>
 1. Handle long numbers
@@ -26,7 +26,7 @@ Bugs</br>
 * ~~Pressing two operators in a row displays NaN because opCount is 2 so equals is invoked~~
 * Pressing equals with one number in an operation that expects two displays NaN
 * Pressing an operator than equals NaN
-* Pressing two operators will not use the last one
+* ~~Pressing two operators will not use the last one~~
 
 Takeaways:</br>
 * I decided to give non operators (AC, DEL, =, ...) listeners by ID because they are not arithmetic operators, and stored.makeArg depends on the last operator key press

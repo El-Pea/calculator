@@ -100,9 +100,9 @@ function opKeyListener(){
     pressed.forEach((op)=>{
         op.addEventListener('click', ()=>{
             if(stored.opCount > 0 && stored.numPressed === true){equals();}
+            if(typeof stored.numString[0] === 'string'){stored.float1 = stored.makeFloat(stored.numString);}
             stored.numPressed = false;
             stored.signString = op.id;
-            stored.float1 = stored.makeFloat(stored.numString);
             stored.opCount++
             stored.numString = [];            
         });  
