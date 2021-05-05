@@ -28,12 +28,12 @@ function operate(operator, a, b){
 function clear(){
     const clear = document.querySelector('#clear');
     clear.addEventListener('click', ()=>{
-        stored.numString = [0];
+        stored.numString = ['0'];
         stored.signString = null;
         stored.float1 = undefined;
         stored.answer = undefined;
         stored.opCount = 0;
-        document.querySelector('.calc__display').textContent = 0;
+        document.querySelector('.calc__display').textContent = '0';
     });
 }
 
@@ -50,7 +50,7 @@ function del(){
 let stored = {
     numString : ['0'],
     makeFloat : function(arr){
-        let float = parseFloat(arr.join(''), 10);
+        let float = parseFloat(arr.join(''));
         return float;
     },
     signString : null,
