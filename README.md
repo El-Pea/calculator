@@ -25,6 +25,7 @@ Bugs</br>
 * ~~Figure out if calling equals in opKeyListener is the right move to implement Feature #5~~
 * ~~Pressing two operators in a row displays NaN because opCount is 2 so equals is invoked~~
 * Pressing equals with one number in an operation that expects two displays NaN
+* Pressing an operator than equals NaN
 * Pressing two operators will not use the last one
 
 Takeaways:</br>
