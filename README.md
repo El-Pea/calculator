@@ -28,4 +28,4 @@ Bugs</br>
 
 Takeaways:</br>
 * I decided to give non operators (AC, DEL, =, ...) listeners by ID because they are not arithmetic operators, and stored.makeArg depends on the last operator key press
-* Consider parseFloat instead of makeFloat
+* Should display be a number field instead of a div?
