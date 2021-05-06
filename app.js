@@ -75,6 +75,7 @@ function equals(){
         num1 = stored.answer;
     };
 
+    // else if posNeg?
     if(typeof stored.numString[0] === 'string'){
         num2 = stored.makeFloat(stored.numString);
         stored.answer = operate(op, num1, num2); 
@@ -110,12 +111,15 @@ function opKeyListener(){
                 stored.signString = op.id;
                 stored.opCount++
                 stored.numString = [];
-                if(op.id === 'posNeg'){equals();}
+                if(op.id === 'posNeg'){
+                    equals();
+                }
             };             
         });  
     });
 }
 
+// clearing numString in here keeps equals() from concatenating num1 and num2 in its block
 function numKeyListener(){
     const number = document.querySelectorAll('.num__num');
     number.forEach((num)=>{
@@ -146,8 +150,6 @@ function display(result){
         displayDiv.textContent = result;
     }
 }
-
-// clearing numString in here keeps equals() from concatenating num1 and num2 in its block
 
 function lightsOn(){
     display();

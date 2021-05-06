@@ -13,7 +13,7 @@ Next Features:</br>
 1. Handle long numbers
     * ID largest reasonable number
     * ID what to do when that limit is reached
-2. Make DEL functional
+2. ~~Make DEL functional~~
 3. Make '.' functional
 4. ~~Make equals do the last operation and value entered~~
 5. ~~Make every operator press but the first equals() and display() until AC~~
