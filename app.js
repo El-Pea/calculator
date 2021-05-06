@@ -23,12 +23,12 @@ function operate(operator, a, b){
     return operator(a, b);
 }
 
-// double check
 function del(){
     const deleteThis = document.querySelector('#del');
     deleteThis.addEventListener('click', ()=>{
-        stored.numString = ['0'];  
-        display();
+        stored.numString.pop()
+        if(stored.numString.length === 0){stored.numString[0] = '0'}  
+        display(stored.makeFloat(stored.numString));
     });  
 }
 
@@ -66,12 +66,15 @@ function equals(){
     let op = stored.makeArg(stored.signString);
     let num1 = undefined;
     let num2 = undefined;
+    
     if(stored.answer === 'Error'){stored.answer = undefined}
+
     if(typeof stored.answer === 'undefined'){
         num1 = stored.float1;
     }else{
         num1 = stored.answer;
     };
+
     if(typeof stored.numString[0] === 'string'){
         num2 = stored.makeFloat(stored.numString);
         stored.answer = operate(op, num1, num2); 
@@ -79,6 +82,7 @@ function equals(){
         stored.answer = 'Error';
         stored.error = true;
     };
+
     display(stored.answer.toString()); 
 }
 
@@ -145,8 +149,7 @@ function display(result){
 
 // clearing numString in here keeps equals() from concatenating num1 and num2 in its block
 
-function init(){
-    // document.querySelector('.calc__display').textContent = 0;
+function lightsOn(){
     display();
     allClear();
     numKeyListener();
@@ -155,7 +158,7 @@ function init(){
     del();
 }
 
-init();
+lightsOn();
 // 
 
 /*
