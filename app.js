@@ -23,6 +23,33 @@ function operate(operator, a, b){
     return operator(a, b);
 }
 
+// needs work
+function posNegListener(){
+    const posNegButton = document.querySelector('#posNeg');
+    posNegButton.addEventListener('click', ()=>{
+        if(typeof stored.float1 === 'undefined'){
+            let a = stored.makeFloat(stored.numString);
+            stored.float1 = operate(posNeg,a); 
+            stored.numString.pop();
+            display(stored.float1.toString());
+        }else if(typeof stored.float1 === 'number'){
+            let a = stored.makeFloat(stored.numString);
+            let flip = operate(posNeg,a);
+            display(flip.toString());
+            stored.numString[0] = flip.toString();
+        }else{
+            // NEED TO HANDLE FLIPPING ANSWERS
+            let a = stored.answer;
+            let flip = operate(posNeg,a);
+            display(flip.toString());
+            stored.answer = flip;
+        }
+        
+        
+
+    });
+}
+
 function del(){
     const deleteThis = document.querySelector('#del');
     deleteThis.addEventListener('click', ()=>{
@@ -76,6 +103,10 @@ function equals(){
     };
 
     // else if posNeg?
+
+    /*if(op === posNeg){
+        stored.answer = operate(op, num1);
+    }else*/
     if(typeof stored.numString[0] === 'string'){
         num2 = stored.makeFloat(stored.numString);
         stored.answer = operate(op, num1, num2); 
@@ -107,13 +138,12 @@ function opKeyListener(){
             if(stored.error === false){
                 if(stored.opCount > 0 && stored.numPressed === true){equals();}
                 if(typeof stored.numString[0] === 'string'){stored.float1 = stored.makeFloat(stored.numString);}
+                
                 stored.numPressed = false;
                 stored.signString = op.id;
+                // if(op.id === 'posNeg'){equals();}
                 stored.opCount++
                 stored.numString = [];
-                if(op.id === 'posNeg'){
-                    equals();
-                }
             };             
         });  
     });
@@ -125,6 +155,7 @@ function numKeyListener(){
     number.forEach((num)=>{
         num.addEventListener('click', ()=>{
             if(stored.error === false){
+                stored.numString.pop();
                 stored.numString.push(num.textContent);
                 stored.numPressed = true;
                 display();
@@ -157,6 +188,7 @@ function lightsOn(){
     numKeyListener();
     opKeyListener();
     equalsListener();
+    posNegListener();
     del();
 }
 

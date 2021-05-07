@@ -17,7 +17,7 @@ Next Features:</br>
 3. Make '.' functional
 4. ~~Make equals do the last operation and value entered~~
 5. ~~Make every operator press but the first equals() and display() until AC~~
-6. Make posNeg equals() when pressed
+6. Make posNeg functional -- INPROGRESS
 
 Bugs</br>
 1. ~~Answers that equal 0 do not update display~~
@@ -27,10 +27,10 @@ Bugs</br>
 5. ~~Pressing equals with one number in an operation that expects two displays NaN~~
 6. ~~Pressing an operator than equals NaN~~
 7. ~~Pressing two operators will not use the last one~~
-8. posNeg displays error
+8. posNeg displays error -- IN PROGRESS
 
 Considerations:</br>
-* I decided to give non operators (AC, DEL, =, ...) listeners by ID because they are not arithmetic operators, and stored.makeArg depends on the last operator key press
+* I decided to break (AC, DEL, =, +/-) out of the operator logic because they aren't arithmetic operators, and stored.makeArg depends on the last operator key press
 * Should display be a number field instead of a div?
 * How will DEL, +/-, and '.' deal with current error handling scheme? opKeys and numKeys are disabled until AC is pressed, but these are still active
 * To the last point, can my listeners go into an if(stored.error = false){} block?
