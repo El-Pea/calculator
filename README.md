@@ -17,7 +17,7 @@ Next Features:</br>
 3. Make '.' functional
 4. ~~Make equals do the last operation and value entered~~
 5. ~~Make every operator press but the first equals() and display() until AC~~
-6. Make posNeg functional -- INPROGRESS
+6. Make posNeg functional -- IN PROGRESS
 
 Bugs</br>
 1. ~~Answers that equal 0 do not update display~~
