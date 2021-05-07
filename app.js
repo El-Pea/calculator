@@ -24,39 +24,28 @@ function operate(operator, a, b){
 }
 
 // needs work
-/*
+
 function posNegListener(){
     const posNegButton = document.querySelector('#posNeg');
     posNegButton.addEventListener('click', ()=>{
-        if(typeof stored.float1 === 'undefined'){
+        // this should handle numbers on either side of the operator because the last thing typed is stored.numString
+        if(typeof stored.answer === 'undefined'){
             let a = stored.makeFloat(stored.numString);
-            stored.float1 = operate(posNeg,a); 
-            stored.numString.pop();
-            display(stored.float1.toString());
-        }else if(typeof stored.float1 === 'number'){
-            let a = stored.makeFloat(stored.numString);
-            let flip = operate(posNeg,a);
-            display(flip.toString());
-            stored.numString[0] = flip.toString();
+            stored.numString[0] = operate(posNeg,a).toString(); 
+            display(stored.numString);
         }else{
-            // NEED TO HANDLE FLIPPING ANSWERS
+        // this should handle answers
             let a = stored.answer;
-            let flip = operate(posNeg,a);
-            display(flip.toString());
-            stored.answer = flip;
+            stored.answer = operate(posNeg,a);
+            display(stored.answer);
         }
-        
-        
-
     });
 }
-*/
-
 
 function del(){
     const deleteThis = document.querySelector('#del');
     deleteThis.addEventListener('click', ()=>{
-        // stored.numString.pop()
+        stored.numString.pop()
         if(stored.numString.length === 0){stored.numString[0] = '0'}  
         display(stored.makeFloat(stored.numString));
     });  
@@ -105,11 +94,6 @@ function equals(){
         num1 = stored.answer;
     };
 
-    // else if posNeg?
-
-    /*if(op === posNeg){
-        stored.answer = operate(op, num1);
-    }else*/
     if(typeof stored.numString[0] === 'string'){
         num2 = stored.makeFloat(stored.numString);
         stored.answer = operate(op, num1, num2); 
@@ -191,7 +175,7 @@ function lightsOn(){
     numKeyListener();
     opKeyListener();
     equalsListener();
-    //posNegListener();
+    posNegListener();
     del();
 }
 
