@@ -35,9 +35,9 @@ function posNegListener(){
             display(stored.numString);
         }else{
         // this should handle answers
-            let a = stored.answer;
-            stored.answer = operate(posNeg,a);
-            display(stored.answer);
+        //    let a = stored.answer;
+        //    stored.answer = operate(posNeg,a);
+        //    display(stored.answer);
         }
     });
 }
@@ -101,7 +101,12 @@ function equals(){
         stored.answer = 'Error';
         stored.error = true;
     };
+    if(stored.float1 === undefined && stored.answer === undefined){
+        stored.answer = 'Error';
+        stored.error = true;
+    }
 
+    // if(stored.answer === 0){stored.numString.pop();}
     display(stored.answer.toString()); 
 }
 
@@ -175,7 +180,7 @@ function lightsOn(){
     numKeyListener();
     opKeyListener();
     equalsListener();
-    posNegListener();
+    // posNegListener();
     del();
 }
 

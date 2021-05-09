@@ -28,6 +28,7 @@ Bugs</br>
 6. ~~Pressing an operator than equals NaN~~
 7. ~~Pressing two operators will not use the last one~~
 8. posNeg displays error -- IN PROGRESS
+9. Need to start fresh with equals()
 
 Considerations:</br>
 * I decided to break (AC, DEL, =, +/-) out of the operator logic because they aren't arithmetic operators, and stored.makeArg depends on the last operator key press
