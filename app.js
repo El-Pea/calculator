@@ -74,6 +74,7 @@ let stored = {
         }
     },
     float1 : undefined,
+    float2 : undefined,
     answer : undefined,
     opCount : 0,
     numPressed : false,
@@ -85,13 +86,18 @@ function equals(){
     let op = stored.makeArg(stored.signString);
     let num1 = undefined;
     let num2 = undefined;
-    
-    if(stored.answer === 'Error'){stored.answer = undefined};
-    if(num1 === undefined || num2 === undefined){stored.answer = 'Error'}
-    
+
+    // if(stored.numString !== stored.float2){}
+
+    stored.float2 = stored.makeFloat(stored.numString);
+
+    num1 = stored.float1;
+    num2 = stored.float2;
+
+    if(stored.answer !== undefined){num1 = stored.answer}
+
     stored.answer = operate(op, num1, num2);
 
-    // if(stored.answer === 0){stored.numString.pop();}
     display(stored.answer.toString()); 
 }
 
@@ -139,6 +145,7 @@ function allClear(){
     });
 }
 
+// clearing numString in here keeps equals() from concatenating num1 and num2 in its block
 function opKeyListener(){
     const pressed = document.querySelectorAll('.op');
     pressed.forEach((op)=>{
@@ -157,7 +164,6 @@ function opKeyListener(){
     });
 }
 
-// clearing numString in here keeps equals() from concatenating num1 and num2 in its block
 function numKeyListener(){
     const number = document.querySelectorAll('.num__num');
     number.forEach((num)=>{
