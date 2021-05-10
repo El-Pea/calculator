@@ -87,6 +87,21 @@ function equals(){
     let num2 = undefined;
     
     if(stored.answer === 'Error'){stored.answer = undefined};
+    if(num1 === undefined || num2 === undefined){stored.answer = 'Error'}
+    
+    stored.answer = operate(op, num1, num2);
+
+    // if(stored.answer === 0){stored.numString.pop();}
+    display(stored.answer.toString()); 
+}
+
+/*
+function equals(){
+    let op = stored.makeArg(stored.signString);
+    let num1 = undefined;
+    let num2 = undefined;
+    
+    if(stored.answer === 'Error'){stored.answer = undefined};
 
     if(typeof stored.answer === 'undefined'){
         num1 = stored.float1;
@@ -109,6 +124,7 @@ function equals(){
     // if(stored.answer === 0){stored.numString.pop();}
     display(stored.answer.toString()); 
 }
+*/
 
 function allClear(){
     const clear = document.querySelector('#clear');
