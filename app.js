@@ -87,50 +87,22 @@ function equals(){
     let num1 = undefined;
     let num2 = undefined;
 
-    // if(stored.numString !== stored.float2){}
-
     stored.float2 = stored.makeFloat(stored.numString);
-
+    stored.numString.pop();
+    
     num1 = stored.float1;
     num2 = stored.float2;
 
-    if(stored.answer !== undefined){num1 = stored.answer}
-
-    stored.answer = operate(op, num1, num2);
-
-    display(stored.answer.toString()); 
-}
-
-/*
-function equals(){
-    let op = stored.makeArg(stored.signString);
-    let num1 = undefined;
-    let num2 = undefined;
-    
-    if(stored.answer === 'Error'){stored.answer = undefined};
-
-    if(typeof stored.answer === 'undefined'){
-        num1 = stored.float1;
-    }else{
-        num1 = stored.answer;
-    };
-
-    if(typeof stored.numString[0] === 'string'){
-        num2 = stored.makeFloat(stored.numString);
-        stored.answer = operate(op, num1, num2); 
-    }else{
-        stored.answer = 'Error';
+    // if(stored.opCount > 1 || stored.numString === undefined){num1 = stored.answer};
+    if(stored.opCount > 1){num1 = stored.answer};
+    if(num1 === undefined || num2 === undefined || num2 === NaN){
+        display('Error');
         stored.error = true;
-    };
-    if(stored.float1 === undefined && stored.answer === undefined){
-        stored.answer = 'Error';
-        stored.error = true;
+    }else{
+        stored.answer = operate(op, num1, num2);
+        display(stored.answer.toString());
     }
-
-    // if(stored.answer === 0){stored.numString.pop();}
-    display(stored.answer.toString()); 
 }
-*/
 
 function allClear(){
     const clear = document.querySelector('#clear');
@@ -156,7 +128,6 @@ function opKeyListener(){
                 
                 stored.numPressed = false;
                 stored.signString = op.id;
-                // if(op.id === 'posNeg'){equals();}
                 stored.opCount++;
                 stored.numString = [];
             };             
