@@ -1,27 +1,27 @@
 function add(a, b){
     return a + b;
-}
+};
 
 function subtract(a, b){
     return a - b;
-}
+};
 
 function multiply(a, b){
     return a * b;
-}
+};
 
 function divide(a, b){
     return a / b;
-}
+};
 
 function posNeg(a){
     return a > 0 ? a * -1: Math.abs(a);
-}
+};
 
 function operate(operator, a, b){
     if(operator === posNeg){return operator(a)}
     return operator(a, b);
-}
+};
 
 // needs work
 
@@ -38,9 +38,9 @@ function posNegListener(){
         //    let a = stored.answer;
         //    stored.answer = operate(posNeg,a);
         //    display(stored.answer);
-        }
+        };
     });
-}
+};
 
 function del(){
     const deleteThis = document.querySelector('#del');
@@ -49,7 +49,7 @@ function del(){
         if(stored.numString.length === 0){stored.numString[0] = '0'}  
         display(stored.makeFloat(stored.numString));
     });  
-}
+};
 
 // stores string-input and provides methods to put them in the type expected by other functions
 let stored = {
@@ -77,32 +77,57 @@ let stored = {
     float2 : undefined,
     answer : undefined,
     opCount : 0,
+    opPressed : false,
     numPressed : false,
+    eqPressed : false,
     error : false,
     
 };
 
+// this handles seperate ops
 function equals(){
     let op = stored.makeArg(stored.signString);
     let num1 = undefined;
     let num2 = undefined;
 
     stored.float2 = stored.makeFloat(stored.numString);
+    num1 = stored.float1;
+    num2 = stored.float2;
+    
+    stored.answer = operate(op, num1, num2);
+    display(stored.answer.toString());
+
     stored.numString.pop();
+};
+
+
+/*
+function equals(){
+    let op = stored.makeArg(stored.signString);
+    let num1 = undefined;
+    let num2 = undefined;
+
+    if(stored.float2 === undefined){stored.float2 = stored.makeFloat(stored.numString)};
+    // if(stored.float2 !== stored.numString){stored.float2 = stored.makeFloat(stored.numString)};
+    
     
     num1 = stored.float1;
     num2 = stored.float2;
 
     // if(stored.opCount > 1 || stored.numString === undefined){num1 = stored.answer};
-    if(stored.opCount > 1){num1 = stored.answer};
+    // if(stored.opCount > 1){num1 = stored.answer};
+    // if(stored.float1 === undefined){num1 = stored.answer};
     if(num1 === undefined || num2 === undefined || num2 === NaN){
         display('Error');
         stored.error = true;
     }else{
         stored.answer = operate(op, num1, num2);
         display(stored.answer.toString());
-    }
-}
+    };
+    // stored.float1 = undefined;
+    stored.float2 = undefined;
+};
+*/
 
 function allClear(){
     const clear = document.querySelector('#clear');
@@ -110,12 +135,13 @@ function allClear(){
         stored.numString = ['0'];
         stored.signString = null;
         stored.float1 = undefined;
+        stored.float2 = undefined;
         stored.answer = undefined;
         stored.opCount = 0;
         stored.error = false;
         document.querySelector('.calc__display').textContent = '0';
     });
-}
+};
 
 // clearing numString in here keeps equals() from concatenating num1 and num2 in its block
 function opKeyListener(){
@@ -125,15 +151,16 @@ function opKeyListener(){
             if(stored.error === false){
                 if(stored.opCount > 0 && stored.numPressed === true){equals();}
                 if(typeof stored.numString[0] === 'string'){stored.float1 = stored.makeFloat(stored.numString);}
-                
+                // stored.float1 = stored.makeFloat(stored.numString);
                 stored.numPressed = false;
+                stored.opPressed = true;
                 stored.signString = op.id;
                 stored.opCount++;
                 stored.numString = [];
             };             
         });  
     });
-}
+};
 
 function numKeyListener(){
     const number = document.querySelectorAll('.num__num');
@@ -143,19 +170,21 @@ function numKeyListener(){
             if(stored.numString[0] === '0'){stored.numString.pop()};
                 stored.numString.push(num.textContent);
                 stored.numPressed = true;
+                stored.opPressed = false;
                 display();
             }; 
         });
     });
-}
+};
 
 function equalsListener(){
     let equalsButton = document.querySelector('#equals');
         equalsButton.addEventListener('click', ()=>{
             equals();
             stored.opCount = 0;
+            // stored.eqPressed = true;
     });
-}
+};
 
 function display(result){
     const displayDiv = document.querySelector('.calc__display');
@@ -164,8 +193,8 @@ function display(result){
         displayDiv.textContent = number;
     }else{
         displayDiv.textContent = result;
-    }
-}
+    };
+};
 
 function lightsOn(){
     display();
@@ -175,7 +204,7 @@ function lightsOn(){
     equalsListener();
     // posNegListener();
     del();
-}
+};
 
 lightsOn();
 // 
