@@ -94,15 +94,24 @@ function equals(){
         stored.float2 = stored.makeFloat(stored.numString);
         num1 = stored.float1;
         num2 = stored.float2;
-    }else if(stored.float1 === undefined){
+    }else if(stored.float1 === undefined && typeof stored.numString[0] === 'string'){
         stored.float2 = stored.makeFloat(stored.numString);
         num1 = stored.answer;
         num2 = stored.float2;
+    } else{
+        num1 = stored.answer;
+        num2 = stored.float2;
     }
-    
+
     
     stored.answer = operate(op, num1, num2);
-    display(stored.answer.toString());
+
+    if(!stored.answer){
+        display('Error');
+        stored.error = true;
+    }else{
+        display(stored.answer.toString());
+    }
 
     stored.numString.pop();
     stored.float1 = undefined;
