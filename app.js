@@ -90,44 +90,23 @@ function equals(){
     let num1 = undefined;
     let num2 = undefined;
 
-    stored.float2 = stored.makeFloat(stored.numString);
-    num1 = stored.float1;
-    num2 = stored.float2;
+    if(typeof stored.float1 === 'number'){
+        stored.float2 = stored.makeFloat(stored.numString);
+        num1 = stored.float1;
+        num2 = stored.float2;
+    }else if(stored.float1 === undefined){
+        stored.float2 = stored.makeFloat(stored.numString);
+        num1 = stored.answer;
+        num2 = stored.float2;
+    }
+    
     
     stored.answer = operate(op, num1, num2);
     display(stored.answer.toString());
 
     stored.numString.pop();
+    stored.float1 = undefined;
 };
-
-
-/*
-function equals(){
-    let op = stored.makeArg(stored.signString);
-    let num1 = undefined;
-    let num2 = undefined;
-
-    if(stored.float2 === undefined){stored.float2 = stored.makeFloat(stored.numString)};
-    // if(stored.float2 !== stored.numString){stored.float2 = stored.makeFloat(stored.numString)};
-    
-    
-    num1 = stored.float1;
-    num2 = stored.float2;
-
-    // if(stored.opCount > 1 || stored.numString === undefined){num1 = stored.answer};
-    // if(stored.opCount > 1){num1 = stored.answer};
-    // if(stored.float1 === undefined){num1 = stored.answer};
-    if(num1 === undefined || num2 === undefined || num2 === NaN){
-        display('Error');
-        stored.error = true;
-    }else{
-        stored.answer = operate(op, num1, num2);
-        display(stored.answer.toString());
-    };
-    // stored.float1 = undefined;
-    stored.float2 = undefined;
-};
-*/
 
 function allClear(){
     const clear = document.querySelector('#clear');
@@ -153,7 +132,7 @@ function opKeyListener(){
                 if(typeof stored.numString[0] === 'string'){stored.float1 = stored.makeFloat(stored.numString);}
                 // stored.float1 = stored.makeFloat(stored.numString);
                 stored.numPressed = false;
-                stored.opPressed = true;
+                // stored.opPressed = true;
                 stored.signString = op.id;
                 stored.opCount++;
                 stored.numString = [];
@@ -170,7 +149,7 @@ function numKeyListener(){
             if(stored.numString[0] === '0'){stored.numString.pop()};
                 stored.numString.push(num.textContent);
                 stored.numPressed = true;
-                stored.opPressed = false;
+                // stored.opPressed = false;
                 display();
             }; 
         });
@@ -207,12 +186,3 @@ function lightsOn(){
 };
 
 lightsOn();
-// 
-
-/*
-
-*/
-
-/*
-
-*/
