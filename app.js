@@ -98,19 +98,20 @@ function equals(){
         stored.float2 = stored.makeFloat(stored.numString);
         num1 = stored.answer;
         num2 = stored.float2;
-    } else{
+    }else{
         num1 = stored.answer;
         num2 = stored.float2;
-    }
+    };
 
-    
     stored.answer = operate(op, num1, num2);
 
-    if(!stored.answer){
+    if(isNaN(stored.answer)){
         display('Error');
         stored.error = true;
+    }else if(Number.isInteger(stored.answer)){
+        display(stored.answer)
     }else{
-        display(stored.answer.toString());
+        display(stored.answer.toPrecision(3));
     }
 
     stored.numString.pop();
@@ -156,10 +157,11 @@ function numKeyListener(){
         num.addEventListener('click', ()=>{
             if(stored.error === false){
             if(stored.numString[0] === '0'){stored.numString.pop()};
-                stored.numString.push(num.textContent);
-                stored.numPressed = true;
+            // if(stored.numString[0] === '.'){stored.numString[0] = '0.0'}
+               stored.numString.push(num.textContent);
+               stored.numPressed = true;
                 // stored.opPressed = false;
-                display();
+               display();
             }; 
         });
     });
@@ -177,6 +179,7 @@ function equalsListener(){
 function display(result){
     const displayDiv = document.querySelector('.calc__display');
     if(!result){
+        if(stored.numString[0] === '.'){stored.numString[0] = '0.0'}
         let number = stored.makeFloat(stored.numString).toString();
         displayDiv.textContent = number;
     }else{

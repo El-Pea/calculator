@@ -14,7 +14,7 @@ Next Features:</br>
     * ID largest reasonable number
     * ID what to do when that limit is reached
 2. ~~Make DEL functional~~
-3. Make '.' functional
+3. Make '.' functional -- IN PROGRESS
 4. ~~Make equals do the last operation and value entered~~
 5. ~~Make every operator press but the first equals() and display() until AC~~
 6. Make posNeg functional -- IN PROGRESS
@@ -28,7 +28,8 @@ Bugs</br>
 6. ~~Pressing an operator than equals NaN~~
 7. ~~Pressing two operators will not use the last one~~
 8. posNeg displays error -- IN PROGRESS
-9. Need to handle operating on a stored answer
+9. ~~Need to handle operating on a stored answer~~
+10. Getting accurate answers, but don't see right side of decimals if input is 0 until another number is pressed
 
 Considerations:</br>
 * I decided to break (AC, DEL, =, +/-) out of the operator logic because they aren't arithmetic operators, and stored.makeArg depends on the last operator key press
