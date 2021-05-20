@@ -193,7 +193,7 @@ function lightsOn(){
     numKeyListener();
     opKeyListener();
     equalsListener();
-    // posNegListener();
+    posNegListener();
     del();
 };
 
