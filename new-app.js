@@ -44,9 +44,9 @@ let calc = {
                 return posNeg;
         }
     },
-    float1 : undefined,
-    float2 : undefined,
-    answer : undefined,
+    float1 : null,
+    float2 : null,
+    answer : null,
     opCount : 0,
 };
 
@@ -75,35 +75,49 @@ function opKeyPress(){
     const opKey = document.querySelectorAll('.op');
     opKey.forEach((op)=>{
         op.addEventListener('click', ()=>{
-            if(typeof calc.value[0] === 'string'){calc.float1 = calc.makeFloat(calc.value);};
-            if(calc.opCount > 0){equals();}
             calc.operator = op.id;
+         // if the display value is empty, which equals will do, makeFloat will return NaN
+            if(typeof calc.value[0] === 'string'){
+                
+                if(calc.float1 === null){
+                    calc.float1 = calc.makeFloat(calc.value);
+
+                }else if(calc.float1 !== null){
+                    calc.float2 = calc.makeFloat(calc.value);
+                    equals();
+
+                };
+            };
             calc.value = [];
+            calc.opCount++;
         });
     });
 };
 
 function equals(){
-    calc.float2 = calc.makeFloat(calc.value);
     
-    let num1 = undefined;
-    let num2 = undefined;
+    let num1 = null;
+    let num2 = null;
+        
+    if(calc.float1 === null){
+        num1 = calc.answer;
+    }else{
+        num1 = calc.float1; 
+    };
 
-    if(calc.float1 !== undefined){
-        num1 = calc.float1;
+    if(calc.float2 === null){
         num2 = calc.makeFloat(calc.value);
     }else{
-        num1 = calc.answer;
-        num2 = calc.makeFloat(calc.value);
-    }
-
+        num2 = calc.float2; 
+    };
+    
     let op = calc.makeArg(calc.operator);
 
     calc.answer = operate(op, num1, num2);;
     
     display(calc.answer);
 
-    calc.float1 = undefined;
+    calc.float1 = null;
     calc.value = [];
 };
 
