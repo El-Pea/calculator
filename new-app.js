@@ -47,7 +47,6 @@ let calc = {
     float1 : null,
     float2 : null,
     answer : null,
-    opCount : 0,
 };
 
 function display(result){
@@ -75,21 +74,27 @@ function opKeyPress(){
     const opKey = document.querySelectorAll('.op');
     opKey.forEach((op)=>{
         op.addEventListener('click', ()=>{
-            calc.operator = op.id;
+            
          // if the display value is empty, which equals will do, makeFloat will return NaN
             if(typeof calc.value[0] === 'string'){
                 
                 if(calc.float1 === null){
                     calc.float1 = calc.makeFloat(calc.value);
-
-                }else if(calc.float1 !== null){
+                    // first number input
+                }else if(calc.answer === null){
                     calc.float2 = calc.makeFloat(calc.value);
                     equals();
-
-                };
-            };
+                    // second operator pressed
+                }else{
+                    calc.float1 = calc.answer;
+                    calc.float2 = calc.makeFloat(calc.value);
+                    equals();
+                    // subsequent operations
+                }
+            
+            calc.operator = op.id;
             calc.value = [];
-            calc.opCount++;
+            };
         });
     });
 };
@@ -98,33 +103,44 @@ function equals(){
     
     let num1 = null;
     let num2 = null;
-        
-    if(calc.float1 === null){
-        num1 = calc.answer;
-    }else{
-        num1 = calc.float1; 
-    };
 
+    /*
     if(calc.float2 === null){
-        num2 = calc.makeFloat(calc.value);
-    }else{
-        num2 = calc.float2; 
-    };
-    
-    let op = calc.makeArg(calc.operator);
+        calc.float2 = calc.makeFloat(calc.value);
 
-    calc.answer = operate(op, num1, num2);;
+    }
+    */
+
+    if(calc.value !== null){
+        calc.float2 = calc.makeFloat(calc.value);  
+    };
+
+    if(calc.answer !== null){
+        calc.float1 = calc.answer;
+    };
+
     
+
+    num1 = calc.float1;
+    num2 = calc.float2;
+
+    let op = calc.makeArg(calc.operator);
+    
+    calc.answer = operate(op, num1, num2);
+
     display(calc.answer);
 
-    calc.float1 = null;
     calc.value = [];
+    // calc.float1 = null;
+    // calc.float2 = null;
 };
 
 function equalsListener(){
     const equalsButton = document.querySelector('#equals');
           equalsButton.addEventListener('click', ()=>{
             equals();
+            calc.float1 = null;
+            calc.answer = null;
     });
 };
 
@@ -132,3 +148,5 @@ display();
 numKeyPress();
 opKeyPress();
 equalsListener();
+
+// how to arrange an answer after equals pressed then op and number pressed? right now clearing calc.answer on key press lets the user do a new operation
