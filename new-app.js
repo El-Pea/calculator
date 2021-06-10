@@ -25,7 +25,7 @@ function operate(operator, a, b){
 
 let calc = {
     value : ['0'],
-    operator : '',
+    operator : null,
     makeFloat : function(arr){
         let float = parseFloat(arr.join(''));
         return float;
@@ -70,31 +70,37 @@ function numKeyPress(){
     });
 };
 
+
+
 function opKeyPress(){
     const opKey = document.querySelectorAll('.op');
     opKey.forEach((op)=>{
         op.addEventListener('click', ()=>{
             
          // if the display value is empty, which equals will do, makeFloat will return NaN
-            if(typeof calc.value[0] === 'string'){
+            // if(typeof calc.value[0] === 'string'){
                 
-                if(calc.float1 === null){
+                if(calc.float1 === null && calc.operator === null && calc.value[0] !== null){
                     calc.float1 = calc.makeFloat(calc.value);
                     // first number input
-                }else if(calc.answer === null){
+                }else if(calc.answer === null && calc.value.length !== 0){
                     calc.float2 = calc.makeFloat(calc.value);
                     equals();
                     // second operator pressed
-                }else{
+                }else if(calc.answer !== null && calc.value[0] !== null){
                     calc.float1 = calc.answer;
                     calc.float2 = calc.makeFloat(calc.value);
                     equals();
                     // subsequent operations
+                }else if(calc.answer === null && calc.float1 === null){
+                    let getAnswer = document.querySelector('.calc__display').textContent;
+                    calc.float1 = parseFloat(getAnswer);
+                    // after equals is pressed if operating on that answer
                 }
             
             calc.operator = op.id;
             calc.value = [];
-            };
+           // };
         });
     });
 };
@@ -104,22 +110,13 @@ function equals(){
     let num1 = null;
     let num2 = null;
 
-    /*
-    if(calc.float2 === null){
-        calc.float2 = calc.makeFloat(calc.value);
-
-    }
-    */
-
     if(calc.value !== null){
         calc.float2 = calc.makeFloat(calc.value);  
     };
-
+    
     if(calc.answer !== null){
         calc.float1 = calc.answer;
     };
-
-    
 
     num1 = calc.float1;
     num2 = calc.float2;
