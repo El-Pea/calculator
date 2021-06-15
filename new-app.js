@@ -51,7 +51,7 @@ let calc = {
 
 function display(result){
     const displayDiv = document.querySelector('.calc__display');
-    if(!result){
+    if(result){
         let number = calc.makeFloat(calc.value).toString();
         displayDiv.textContent = number;
     }else{
@@ -83,10 +83,10 @@ function opKeyPress(){
                 if(calc.float1 === null && calc.operator === null && calc.value[0] !== null){
                     calc.float1 = calc.makeFloat(calc.value);
                     // first number input
-                }else if(calc.answer === null && calc.value.length !== 0){
+                }else if(calc.answer === null && calc.value.length !== 0 && calc.float1 !== null){
                     calc.float2 = calc.makeFloat(calc.value);
                     equals();
-                    // second operator pressed
+                    // second operator pressed //this is catching new operations after equals is pressed
                 }else if(calc.answer !== null && calc.value[0] !== null){
                     calc.float1 = calc.answer;
                     calc.float2 = calc.makeFloat(calc.value);
@@ -110,7 +110,12 @@ function equals(){
     let num1 = null;
     let num2 = null;
 
-    if(calc.value !== null){
+    if(calc.answer === null && calc.value.length === 0){
+        let getAnswer = document.querySelector('.calc__display').textContent;
+        calc.float1 = parseFloat(getAnswer);
+    }
+
+    if(calc.value.length !== 0){
         calc.float2 = calc.makeFloat(calc.value);  
     };
     
