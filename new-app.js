@@ -51,7 +51,7 @@ let calc = {
 
 function display(result){
     const displayDiv = document.querySelector('.calc__display');
-    if(result){
+    if(!result){
         let number = calc.makeFloat(calc.value).toString();
         displayDiv.textContent = number;
     }else{
