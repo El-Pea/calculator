@@ -70,15 +70,21 @@ function numKeyPress(){
     });
 };
 
-
+function specialKeyPress(){
+    const specialKey = document.querySelectorAll('.spec');
+    specialKey.forEach((spec)=>{
+        spec.addEventListener('click', ()=>{
+            if(spec.id === 'posNeg'){alert(spec.id)};
+            if(spec.id === 'del'){alert(spec.id)};
+            if(spec.id === 'clear'){alert(spec.id)};
+        });
+    });
+}
 
 function opKeyPress(){
     const opKey = document.querySelectorAll('.op');
     opKey.forEach((op)=>{
         op.addEventListener('click', ()=>{
-            
-         // if the display value is empty, which equals will do, makeFloat will return NaN
-            // if(typeof calc.value[0] === 'string'){
                 
                 if(calc.float1 === null && calc.operator === null && calc.value[0] !== null){
                     calc.float1 = calc.makeFloat(calc.value);
@@ -100,7 +106,6 @@ function opKeyPress(){
             
             calc.operator = op.id;
             calc.value = [];
-           // };
         });
     });
 };
@@ -147,8 +152,8 @@ function equalsListener(){
 };
 
 display();
+specialKeyPress();
 numKeyPress();
 opKeyPress();
 equalsListener();
 
-// how to arrange an answer after equals pressed then op and number pressed? right now clearing calc.answer on key press lets the user do a new operation
