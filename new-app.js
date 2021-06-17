@@ -23,6 +23,27 @@ function operate(operator, a, b){
     return operator(a, b);
 };
 
+function negate(){
+    if(calc.value.length !== 0){
+        const number = calc.makeFloat(calc.value);
+        calc.value = [];
+        calc.value[0] = posNeg(number).toString();
+        display(calc.makeFloat(calc.value)); 
+    }else{
+        const displayValue = document.querySelector('.calc__display').textContent;
+        calc.answer = posNeg(parseFloat(displayValue));
+        display(calc.answer);
+    };
+};
+
+function del(){
+    
+};
+
+function clear(){
+
+};
+
 let calc = {
     value : ['0'],
     operator : null,
@@ -74,7 +95,7 @@ function specialKeyPress(){
     const specialKey = document.querySelectorAll('.spec');
     specialKey.forEach((spec)=>{
         spec.addEventListener('click', ()=>{
-            if(spec.id === 'posNeg'){alert(spec.id)};
+            if(spec.id === 'posNeg'){negate()};
             if(spec.id === 'del'){alert(spec.id)};
             if(spec.id === 'clear'){alert(spec.id)};
         });
@@ -86,14 +107,14 @@ function opKeyPress(){
     opKey.forEach((op)=>{
         op.addEventListener('click', ()=>{
                 
-                if(calc.float1 === null && calc.operator === null && calc.value[0] !== null){
+                if(calc.float1 === null && calc.operator === null && calc.value.length !== 0){
                     calc.float1 = calc.makeFloat(calc.value);
                     // first number input
                 }else if(calc.answer === null && calc.value.length !== 0 && calc.float1 !== null){
                     calc.float2 = calc.makeFloat(calc.value);
                     equals();
                     // second operator pressed //this is catching new operations after equals is pressed
-                }else if(calc.answer !== null && calc.value[0] !== null){
+                }else if(calc.answer !== null && calc.value.length !== 0){
                     calc.float1 = calc.answer;
                     calc.float2 = calc.makeFloat(calc.value);
                     equals();
