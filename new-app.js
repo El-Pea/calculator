@@ -37,7 +37,10 @@ function negate(){
 };
 
 function del(){
-    
+    if(calc.value.length !== 0){
+        calc.value.pop()
+        display();
+    };   
 };
 
 function clear(){
@@ -96,7 +99,7 @@ function specialKeyPress(){
     specialKey.forEach((spec)=>{
         spec.addEventListener('click', ()=>{
             if(spec.id === 'posNeg'){negate()};
-            if(spec.id === 'del'){alert(spec.id)};
+            if(spec.id === 'del'){del()};
             if(spec.id === 'clear'){alert(spec.id)};
         });
     });
@@ -113,7 +116,7 @@ function opKeyPress(){
                 }else if(calc.answer === null && calc.value.length !== 0 && calc.float1 !== null){
                     calc.float2 = calc.makeFloat(calc.value);
                     equals();
-                    // second operator pressed //this is catching new operations after equals is pressed
+                    // second operator pressed 
                 }else if(calc.answer !== null && calc.value.length !== 0){
                     calc.float1 = calc.answer;
                     calc.float2 = calc.makeFloat(calc.value);
