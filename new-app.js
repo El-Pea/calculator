@@ -47,6 +47,14 @@ function clear(){
 
 };
 
+function insertDecimalPoint(){
+    const decimalButton = document.querySelector('#decimal');
+        if(!calc.value.includes('.')){
+            calc.value.push(decimalButton.textContent);
+            display();
+        };
+};
+
 let calc = {
     value : ['0'],
     operator : null,
@@ -101,6 +109,7 @@ function specialKeyPress(){
             if(spec.id === 'posNeg'){negate()};
             if(spec.id === 'del'){del()};
             if(spec.id === 'clear'){alert(spec.id)};
+            if(spec.id === 'decimal'){insertDecimalPoint()};
         });
     });
 }
