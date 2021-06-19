@@ -55,16 +55,6 @@ function insertDecimalPoint(){
         };
 };
 
-/*
-function isDecimal(number){
-    if(number === Math.floor(number)){
-        return number
-    }else{
-        return number.toFixed(2);
-    }
-};
-*/
-
 function decimalHandler(number){
     if(number === Math.floor(number)){
         return number
