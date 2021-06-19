@@ -55,6 +55,32 @@ function insertDecimalPoint(){
         };
 };
 
+/*
+function isDecimal(number){
+    if(number === Math.floor(number)){
+        return number
+    }else{
+        return number.toFixed(2);
+    }
+};
+*/
+
+function decimalHandler(number){
+    if(number === Math.floor(number)){
+        return number
+    }else{
+        let arr = number.toString().split('');
+        for(let i = 0; i < arr.length; i++){
+            if(arr[i] === '0' && (arr[i+1] === '0' || arr[i+1] === undefined)){
+                arr.splice(i);
+                console.log(arr);
+            }
+        };
+        return parseFloat(arr.join(''));
+    }
+};
+
+
 let calc = {
     value : ['0'],
     operator : null,
@@ -168,7 +194,8 @@ function equals(){
     
     calc.answer = operate(op, num1, num2);
 
-    display(calc.answer);
+    display(decimalHandler(calc.answer));
+    // display(calc.answer);
 
     calc.value = [];
     // calc.float1 = null;
