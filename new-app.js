@@ -24,11 +24,11 @@ function operate(operator, a, b){
 };
 
 function negate(){
-    if(calc.value.length !== 0){
-        const number = calc.makeFloat(calc.value);
-        calc.value = [];
-        calc.value[0] = posNeg(number).toString();
-        display(calc.makeFloat(calc.value)); 
+    if(calc.inputArray.length !== 0){
+        const number = calc.joinInputArray(calc.inputArray);
+        calc.inputArray = [];
+        calc.inputArray[0] = posNeg(number).toString();
+        display(calc.joinInputArray(calc.inputArray)); 
     }else{
         const displayValue = document.querySelector('.calc__display').textContent;
         calc.answer = posNeg(parseFloat(displayValue));
@@ -37,8 +37,8 @@ function negate(){
 };
 
 function del(){
-    if(calc.value.length !== 0){
-        calc.value.pop()
+    if(calc.inputArray.length !== 0){
+        calc.inputArray.pop()
         display();
     };   
 };
@@ -49,8 +49,9 @@ function clear(){
 
 function insertDecimalPoint(){
     const decimalButton = document.querySelector('#decimal');
-        if(!calc.value.includes('.')){
-            calc.value.push(decimalButton.textContent);
+        if(!calc.inputArray.includes('.')){
+            calc.inputArray.push(decimalButton.textContent);
+            
             display();
         };
 };
@@ -72,9 +73,9 @@ function decimalHandler(number){
 
 
 let calc = {
-    value : ['0'],
+    inputArray : ['0'],
     operator : null,
-    makeFloat : function(arr){
+    joinInputArray : function(arr){
         let float = parseFloat(arr.join(''));
         return float;
     },
@@ -100,7 +101,7 @@ let calc = {
 function display(result){
     const displayDiv = document.querySelector('.calc__display');
     if(result === undefined){
-        let number = calc.makeFloat(calc.value).toString();
+        let number = calc.joinInputArray(calc.inputArray).toString();
         displayDiv.textContent = number;
     }else{
         displayDiv.textContent = result;
@@ -111,8 +112,8 @@ function numKeyPress(){
     const number = document.querySelectorAll('.num__num');
     number.forEach((num)=>{
         num.addEventListener('click', ()=>{
-            if(calc.value[0] === '0'){calc.value.pop()};
-            calc.value.push(num.textContent);
+            if(calc.inputArray[0] === '0'){calc.inputArray.pop()};
+            calc.inputArray.push(num.textContent);
             display();
         });
     });
@@ -135,16 +136,16 @@ function opKeyPress(){
     opKey.forEach((op)=>{
         op.addEventListener('click', ()=>{
                 
-                if(calc.float1 === null && calc.operator === null && calc.value.length !== 0){
-                    calc.float1 = calc.makeFloat(calc.value);
+                if(calc.float1 === null && calc.operator === null && calc.inputArray.length !== 0){
+                    calc.float1 = calc.joinInputArray(calc.inputArray);
                     // first number input
-                }else if(calc.answer === null && calc.value.length !== 0 && calc.float1 !== null){
-                    calc.float2 = calc.makeFloat(calc.value);
+                }else if(calc.answer === null && calc.inputArray.length !== 0 && calc.float1 !== null){
+                    calc.float2 = calc.joinInputArray(calc.inputArray);
                     equals();
                     // second operator pressed 
-                }else if(calc.answer !== null && calc.value.length !== 0){
+                }else if(calc.answer !== null && calc.inputArray.length !== 0){
                     calc.float1 = calc.answer;
-                    calc.float2 = calc.makeFloat(calc.value);
+                    calc.float2 = calc.joinInputArray(calc.inputArray);
                     equals();
                     // subsequent operations
                 }else if(calc.answer === null && calc.float1 === null){
@@ -154,7 +155,7 @@ function opKeyPress(){
                 }
             
             calc.operator = op.id;
-            calc.value = [];
+            calc.inputArray = [];
         });
     });
 };
@@ -164,13 +165,13 @@ function equals(){
     let num1 = null;
     let num2 = null;
 
-    if(calc.answer === null && calc.value.length === 0){
+    if(calc.answer === null && calc.inputArray.length === 0){
         let getAnswer = document.querySelector('.calc__display').textContent;
         calc.float1 = parseFloat(getAnswer);
     }
 
-    if(calc.value.length !== 0){
-        calc.float2 = calc.makeFloat(calc.value);  
+    if(calc.inputArray.length !== 0){
+        calc.float2 = calc.joinInputArray(calc.inputArray);  
     };
     
     if(calc.answer !== null){
@@ -187,7 +188,7 @@ function equals(){
     display(decimalHandler(calc.answer));
     // display(calc.answer);
 
-    calc.value = [];
+    calc.inputArray = [];
     // calc.float1 = null;
     // calc.float2 = null;
 };
