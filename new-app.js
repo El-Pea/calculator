@@ -111,7 +111,8 @@ function numKeyPress(){
     const number = document.querySelectorAll('.num__num');
     number.forEach((num)=>{
         num.addEventListener('click', ()=>{
-            if(calc.inputArray[0] === '0'){calc.inputArray.pop()};
+            if(calc.inputArray[0] === '0' && calc.inputArray[1] === undefined){calc.inputArray.pop()};
+            if(calc.inputArray[0] === '.')(calc.inputArray.push('0','.'))
             calc.inputArray.push(num.textContent);
             display();
         });
