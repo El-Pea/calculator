@@ -25,10 +25,10 @@ function operate(operator, a, b){
 
 function negate(){
     if(calc.inputArray.length !== 0){
-        const number = calc.joinInputArray(calc.inputArray);
+        const number = calc.arrayToFloat(calc.inputArray);
         calc.inputArray = [];
         calc.inputArray[0] = posNeg(number).toString();
-        display(calc.joinInputArray(calc.inputArray)); 
+        display(calc.arrayToFloat(calc.inputArray)); 
     }else{
         const displayValue = document.querySelector('.calc__display').textContent;
         calc.answer = posNeg(parseFloat(displayValue));
@@ -51,8 +51,7 @@ function insertDecimalPoint(){
     const decimalButton = document.querySelector('#decimal');
         if(!calc.inputArray.includes('.')){
             calc.inputArray.push(decimalButton.textContent);
-            
-            display();
+            display(calc.inputArray.join(''));
         };
 };
 
@@ -75,7 +74,7 @@ function decimalHandler(number){
 let calc = {
     inputArray : ['0'],
     operator : null,
-    joinInputArray : function(arr){
+    arrayToFloat : function(arr){
         let float = parseFloat(arr.join(''));
         return float;
     },
@@ -101,7 +100,7 @@ let calc = {
 function display(result){
     const displayDiv = document.querySelector('.calc__display');
     if(result === undefined){
-        let number = calc.joinInputArray(calc.inputArray).toString();
+        let number = calc.arrayToFloat(calc.inputArray).toString();
         displayDiv.textContent = number;
     }else{
         displayDiv.textContent = result;
@@ -137,15 +136,15 @@ function opKeyPress(){
         op.addEventListener('click', ()=>{
                 
                 if(calc.float1 === null && calc.operator === null && calc.inputArray.length !== 0){
-                    calc.float1 = calc.joinInputArray(calc.inputArray);
+                    calc.float1 = calc.arrayToFloat(calc.inputArray);
                     // first number input
                 }else if(calc.answer === null && calc.inputArray.length !== 0 && calc.float1 !== null){
-                    calc.float2 = calc.joinInputArray(calc.inputArray);
+                    calc.float2 = calc.arrayToFloat(calc.inputArray);
                     equals();
                     // second operator pressed 
                 }else if(calc.answer !== null && calc.inputArray.length !== 0){
                     calc.float1 = calc.answer;
-                    calc.float2 = calc.joinInputArray(calc.inputArray);
+                    calc.float2 = calc.arrayToFloat(calc.inputArray);
                     equals();
                     // subsequent operations
                 }else if(calc.answer === null && calc.float1 === null){
@@ -171,7 +170,7 @@ function equals(){
     }
 
     if(calc.inputArray.length !== 0){
-        calc.float2 = calc.joinInputArray(calc.inputArray);  
+        calc.float2 = calc.arrayToFloat(calc.inputArray);  
     };
     
     if(calc.answer !== null){

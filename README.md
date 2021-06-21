@@ -20,7 +20,7 @@ Next Features:</br>
 6. ~~Make posNeg functional~~ 
 
 Bugs</br>
-1. Decimal point doesn't display until decimal pressed. Likely because of parseFloat() in calc.joinInputArray(). Consider scrapping this method and using join() where applicable but pay attention to where the program is currently expecting a number type
+1. ~~Decimal point doesn't display until decimal pressed.~~
 2. Can't start an op with a decimal
 3. Large numbers blowout div
 4. Slow on mobile
