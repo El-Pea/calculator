@@ -50,7 +50,12 @@ function clear(){
 function insertDecimalPoint(){
     const decimalButton = document.querySelector('#decimal');
         if(!calc.inputArray.includes('.')){
-            calc.inputArray.push(decimalButton.textContent);
+            if(calc.inputArray[0] === undefined){
+                calc.inputArray.splice(0, 1 ,'0','.')
+            }else{
+                calc.inputArray.push(decimalButton.textContent);
+            };
+            
             display(calc.inputArray.join(''));
         };
 };
@@ -112,7 +117,7 @@ function numKeyPress(){
     number.forEach((num)=>{
         num.addEventListener('click', ()=>{
             if(calc.inputArray[0] === '0' && calc.inputArray[1] === undefined){calc.inputArray.pop()};
-            if(calc.inputArray[0] === '.')(calc.inputArray.push('0','.'))
+            // if(calc.inputArray[0] === '.'){calc.inputArray.push('0','.')};
             calc.inputArray.push(num.textContent);
             display();
         });
