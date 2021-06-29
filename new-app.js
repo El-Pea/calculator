@@ -44,7 +44,12 @@ function del(){
 };
 
 function clear(){
-
+    calc.inputArray = ['0'];
+    calc.operator = null;
+    calc.float1 = null;
+    calc.float2 = null;
+    calc.answer = null; 
+    display();     
 };
 
 function insertDecimalPoint(){
@@ -66,15 +71,17 @@ function decimalHandler(number){
     }else{
         let arr = number.toString().split('');
         for(let i = 0; i < arr.length; i++){
+            // if(arr[i] === arr[i+1]){
+            //    Math.ceil(arr[i])
+            // }
             if(arr[i] === '0' && (arr[i+1] === '0' || arr[i+1] === undefined)){
-                arr.splice(i);
-                console.log(arr);
+                arr.splice(i); 
             }
+            
         };
         return parseFloat(arr.join(''));
     }
 };
-
 
 let calc = {
     inputArray : ['0'],
@@ -105,8 +112,9 @@ let calc = {
 function display(result){
     const displayDiv = document.querySelector('.calc__display');
     if(result === undefined){
-        let number = calc.arrayToFloat(calc.inputArray).toString();
-        displayDiv.textContent = number;
+        // let number = calc.arrayToFloat(calc.inputArray).toString();
+        let displayValue = calc.inputArray.join('');
+        displayDiv.textContent = displayValue;
     }else{
         displayDiv.textContent = result;
     };
@@ -116,10 +124,11 @@ function numKeyPress(){
     const number = document.querySelectorAll('.num__num');
     number.forEach((num)=>{
         num.addEventListener('click', ()=>{
-            if(calc.inputArray[0] === '0' && calc.inputArray[1] === undefined){calc.inputArray.pop()};
-            // if(calc.inputArray[0] === '.'){calc.inputArray.push('0','.')};
-            calc.inputArray.push(num.textContent);
-            display();
+            if(calc.inputArray.length <= 8){
+                if(calc.inputArray[0] === '0' && calc.inputArray[1] === undefined){calc.inputArray.pop()};
+                calc.inputArray.push(num.textContent);
+                display();
+            } 
         });
     });
 };
@@ -130,7 +139,7 @@ function specialKeyPress(){
         spec.addEventListener('click', ()=>{
             if(spec.id === 'posNeg'){negate()};
             if(spec.id === 'del'){del()};
-            if(spec.id === 'clear'){alert(spec.id)};
+            if(spec.id === 'clear'){clear()};
             if(spec.id === 'decimal'){insertDecimalPoint()};
         });
     });
@@ -190,7 +199,9 @@ function equals(){
     
     calc.answer = operate(op, num1, num2);
 
-    display(decimalHandler(calc.answer));
+
+    display(parseFloat(calc.answer.toPrecision(3)));
+    // display(decimalHandler(calc.answer));
     // display(calc.answer);
 
     calc.inputArray = [];
@@ -213,3 +224,13 @@ numKeyPress();
 opKeyPress();
 equalsListener();
 
+/*
+Decimal handling strategy
+
+let test = 3.12349834
+parseFloat(test.toFixed(2))
+*/
+
+/*
+display(parseFloat(calc.answer.toPrecision(8)));
+*/
