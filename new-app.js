@@ -65,22 +65,13 @@ function insertDecimalPoint(){
         };
 };
 
-function decimalHandler(number){
-    if(number === Math.floor(number)){
-        return number
+function formatAnswer(num){
+    num = num.toString();
+    if(num.length > 9){
+        return parseFloat(num).toExponential(2)
     }else{
-        let arr = number.toString().split('');
-        for(let i = 0; i < arr.length; i++){
-            // if(arr[i] === arr[i+1]){
-            //    Math.ceil(arr[i])
-            // }
-            if(arr[i] === '0' && (arr[i+1] === '0' || arr[i+1] === undefined)){
-                arr.splice(i); 
-            }
-            
-        };
-        return parseFloat(arr.join(''));
-    }
+        return num;
+    };
 };
 
 let calc = {
@@ -112,7 +103,6 @@ let calc = {
 function display(result){
     const displayDiv = document.querySelector('.calc__display');
     if(result === undefined){
-        // let number = calc.arrayToFloat(calc.inputArray).toString();
         let displayValue = calc.inputArray.join('');
         displayDiv.textContent = displayValue;
     }else{
@@ -199,14 +189,10 @@ function equals(){
     
     calc.answer = operate(op, num1, num2);
 
-
-    display(parseFloat(calc.answer.toPrecision(3)));
-    // display(decimalHandler(calc.answer));
-    // display(calc.answer);
+    
+    display(formatAnswer(calc.answer));
 
     calc.inputArray = [];
-    // calc.float1 = null;
-    // calc.float2 = null;
 };
 
 function equalsListener(){
@@ -223,14 +209,3 @@ specialKeyPress();
 numKeyPress();
 opKeyPress();
 equalsListener();
-
-/*
-Decimal handling strategy
-
-let test = 3.12349834
-parseFloat(test.toFixed(2))
-*/
-
-/*
-display(parseFloat(calc.answer.toPrecision(8)));
-*/
