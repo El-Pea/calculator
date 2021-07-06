@@ -91,8 +91,6 @@ let calc = {
                 return multiply;
             case 'divide' :
                 return divide;
-            case 'posNeg' :
-                return posNeg;
         }
     },
     float1 : null,
