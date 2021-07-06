@@ -1,6 +1,6 @@
 # calculator
 
-<h1>TOP Etch-a-Sketch Project</h1>
+<h1>TOP Calculator</h1>
 
 **[UNDER CONSTRUCTION!](https://el-pea.github.io/calculator/)**
 
