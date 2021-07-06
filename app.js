@@ -23,42 +23,64 @@ function operate(operator, a, b){
     return operator(a, b);
 };
 
-// needs work
-
-function posNegListener(){
-    const posNegButton = document.querySelector('#posNeg');
-    posNegButton.addEventListener('click', ()=>{
-        // this should handle numbers on either side of the operator because the last thing typed is stored.numString
-        if(typeof stored.answer === 'undefined'){
-            let a = stored.makeFloat(stored.numString);
-            stored.numString[0] = operate(posNeg,a).toString(); 
-            display(stored.numString);
-        }else{
-        // this should handle answers
-        //    let a = stored.answer;
-        //    stored.answer = operate(posNeg,a);
-        //    display(stored.answer);
-        };
-    });
+function negate(){
+    if(calc.inputArray.length !== 0){
+        const number = calc.arrayToFloat(calc.inputArray);
+        calc.inputArray = [];
+        calc.inputArray[0] = posNeg(number).toString();
+        display(calc.arrayToFloat(calc.inputArray)); 
+    }else{
+        const displayValue = document.querySelector('.calc__display').textContent;
+        calc.answer = posNeg(parseFloat(displayValue));
+        display(calc.answer);
+    };
 };
 
 function del(){
-    const deleteThis = document.querySelector('#del');
-    deleteThis.addEventListener('click', ()=>{
-        stored.numString.pop()
-        if(stored.numString.length === 0){stored.numString[0] = '0'}  
-        display(stored.makeFloat(stored.numString));
-    });  
+    if(calc.inputArray.length !== 0){
+        calc.inputArray.pop()
+        display();
+    };   
 };
 
-// stores string-input and provides methods to put them in the type expected by other functions
-let stored = {
-    numString : ['0'],
-    makeFloat : function(arr){
+function clear(){
+    calc.inputArray = ['0'];
+    calc.operator = null;
+    calc.float1 = null;
+    calc.float2 = null;
+    calc.answer = null; 
+    display();     
+};
+
+function insertDecimalPoint(){
+    const decimalButton = document.querySelector('#decimal');
+        if(!calc.inputArray.includes('.')){
+            if(calc.inputArray[0] === undefined){
+                calc.inputArray.splice(0, 1 ,'0','.')
+            }else{
+                calc.inputArray.push(decimalButton.textContent);
+            };
+            
+            display(calc.inputArray.join(''));
+        };
+};
+
+function formatAnswer(num){
+    num = num.toString();
+    if(num.length > 9){
+        return parseFloat(num).toExponential(2)
+    }else{
+        return num;
+    };
+};
+
+let calc = {
+    inputArray : ['0'],
+    operator : null,
+    arrayToFloat : function(arr){
         let float = parseFloat(arr.join(''));
         return float;
     },
-    signString : null,
     makeArg : function(signString){
         switch(signString){
             case 'add' :
@@ -73,128 +95,117 @@ let stored = {
                 return posNeg;
         }
     },
-    float1 : undefined,
-    float2 : undefined,
-    answer : undefined,
-    opCount : 0,
-    opPressed : false,
-    numPressed : false,
-    eqPressed : false,
-    error : false,
-    
-};
-
-// this handles seperate ops
-function equals(){
-    let op = stored.makeArg(stored.signString);
-    let num1 = undefined;
-    let num2 = undefined;
-
-    if(typeof stored.float1 === 'number'){
-        stored.float2 = stored.makeFloat(stored.numString);
-        num1 = stored.float1;
-        num2 = stored.float2;
-    }else if(stored.float1 === undefined && typeof stored.numString[0] === 'string'){
-        stored.float2 = stored.makeFloat(stored.numString);
-        num1 = stored.answer;
-        num2 = stored.float2;
-    }else{
-        num1 = stored.answer;
-        num2 = stored.float2;
-    };
-
-    stored.answer = operate(op, num1, num2);
-
-    if(isNaN(stored.answer)){
-        display('Error');
-        stored.error = true;
-    }else if(Number.isInteger(stored.answer)){
-        display(stored.answer)
-    }else{
-        display(stored.answer.toPrecision(3));
-    }
-
-    stored.numString.pop();
-    stored.float1 = undefined;
-};
-
-function allClear(){
-    const clear = document.querySelector('#clear');
-    clear.addEventListener('click', ()=>{
-        stored.numString = ['0'];
-        stored.signString = null;
-        stored.float1 = undefined;
-        stored.float2 = undefined;
-        stored.answer = undefined;
-        stored.opCount = 0;
-        stored.error = false;
-        document.querySelector('.calc__display').textContent = '0';
-    });
-};
-
-// clearing numString in here keeps equals() from concatenating num1 and num2 in its block
-function opKeyListener(){
-    const pressed = document.querySelectorAll('.op');
-    pressed.forEach((op)=>{
-        op.addEventListener('click', ()=>{
-            if(stored.error === false){
-                if(stored.opCount > 0 && stored.numPressed === true){equals();}
-                if(typeof stored.numString[0] === 'string'){stored.float1 = stored.makeFloat(stored.numString);}
-                // stored.float1 = stored.makeFloat(stored.numString);
-                stored.numPressed = false;
-                // stored.opPressed = true;
-                stored.signString = op.id;
-                stored.opCount++;
-                stored.numString = [];
-            };             
-        });  
-    });
-};
-
-function numKeyListener(){
-    const number = document.querySelectorAll('.num__num');
-    number.forEach((num)=>{
-        num.addEventListener('click', ()=>{
-            if(stored.error === false){
-            if(stored.numString[0] === '0'){stored.numString.pop()};
-            // if(stored.numString[0] === '.'){stored.numString[0] = '0.0'}
-               stored.numString.push(num.textContent);
-               stored.numPressed = true;
-                // stored.opPressed = false;
-               display();
-            }; 
-        });
-    });
-};
-
-function equalsListener(){
-    let equalsButton = document.querySelector('#equals');
-        equalsButton.addEventListener('click', ()=>{
-            equals();
-            stored.opCount = 0;
-            // stored.eqPressed = true;
-    });
+    float1 : null,
+    float2 : null,
+    answer : null,
 };
 
 function display(result){
     const displayDiv = document.querySelector('.calc__display');
-    if(!result){
-        if(stored.numString[0] === '.'){stored.numString[0] = '0.0'}
-        let number = stored.makeFloat(stored.numString).toString();
-        displayDiv.textContent = number;
+    if(result === undefined){
+        let displayValue = calc.inputArray.join('');
+        displayDiv.textContent = displayValue;
     }else{
         displayDiv.textContent = result;
     };
 };
 
-function lightsOn(){
-    display();
-    allClear();
-    numKeyListener();
-    opKeyListener();
-    equalsListener();
-    posNegListener();
-    del();
+function numKeyPress(){
+    const number = document.querySelectorAll('.num__num');
+    number.forEach((num)=>{
+        num.addEventListener('click', ()=>{
+            if(calc.inputArray.length <= 8){
+                if(calc.inputArray[0] === '0' && calc.inputArray[1] === undefined){calc.inputArray.pop()};
+                calc.inputArray.push(num.textContent);
+                display();
+            } 
+        });
+    });
 };
 
-lightsOn();
+function specialKeyPress(){
+    const specialKey = document.querySelectorAll('.spec');
+    specialKey.forEach((spec)=>{
+        spec.addEventListener('click', ()=>{
+            if(spec.id === 'posNeg'){negate()};
+            if(spec.id === 'del'){del()};
+            if(spec.id === 'clear'){clear()};
+            if(spec.id === 'decimal'){insertDecimalPoint()};
+        });
+    });
+}
+
+function opKeyPress(){
+    const opKey = document.querySelectorAll('.op');
+    opKey.forEach((op)=>{
+        op.addEventListener('click', ()=>{
+                
+                if(calc.float1 === null && calc.operator === null && calc.inputArray.length !== 0){
+                    calc.float1 = calc.arrayToFloat(calc.inputArray);
+                    // first number input
+                }else if(calc.answer === null && calc.inputArray.length !== 0 && calc.float1 !== null){
+                    calc.float2 = calc.arrayToFloat(calc.inputArray);
+                    equals();
+                    // second operator pressed 
+                }else if(calc.answer !== null && calc.inputArray.length !== 0){
+                    calc.float1 = calc.answer;
+                    calc.float2 = calc.arrayToFloat(calc.inputArray);
+                    equals();
+                    // subsequent operations
+                }else if(calc.answer === null && calc.float1 === null){
+                    let getAnswer = document.querySelector('.calc__display').textContent;
+                    calc.float1 = parseFloat(getAnswer);
+                    // after equals is pressed if operating on that answer
+                }
+            
+            calc.operator = op.id;
+            calc.inputArray = [];
+        });
+    });
+};
+
+function equals(){
+    
+    let num1 = null;
+    let num2 = null;
+
+    if(calc.answer === null && calc.inputArray.length === 0){
+        let getAnswer = document.querySelector('.calc__display').textContent;
+        calc.float1 = parseFloat(getAnswer);
+    }
+
+    if(calc.inputArray.length !== 0){
+        calc.float2 = calc.arrayToFloat(calc.inputArray);  
+    };
+    
+    if(calc.answer !== null){
+        calc.float1 = calc.answer;
+    };
+
+    num1 = calc.float1;
+    num2 = calc.float2;
+
+    let op = calc.makeArg(calc.operator);
+    
+    calc.answer = operate(op, num1, num2);
+
+    
+    display(formatAnswer(calc.answer));
+
+    calc.inputArray = [];
+};
+
+function equalsListener(){
+    const equalsButton = document.querySelector('#equals');
+          equalsButton.addEventListener('click', ()=>{
+            equals();
+            calc.float1 = null;
+            calc.answer = null;
+    });
+};
+
+display();
+specialKeyPress();
+numKeyPress();
+opKeyPress();
+equalsListener();
