@@ -23,56 +23,99 @@ img {
 }
 
 /*^^^RESET^^^*/
-.main {
-    height: 100%;
-    display: grid;
-}
 
 .calc {
     display: grid;
-    grid-template-areas: 
-    'dis dis dis dis'
-    'ac del pos-neg divi'
-    'sev eight nine ex'
-    'four five six minus'
-    'one two three plus'
-    'zilch zilch deci equals';
-    column-gap: 1fr;
-    row-gap: 1fr;
+    grid-template-columns: repeat(4, 20fr);
+    grid-template-rows: repeat(7, 15fr);
     margin: 10vh auto; 
-    border: solid black;
+    border: solid black 1px;
     border-radius: 5px;
-    height: 80vh;
-    width: 60vh;
+    height: 63vh;
+    width: 42vh;
+    padding: 1vh;
+    background-color: #2E4272;
+}
+
+.calc__display, .calc__button{
+    display: flex;
+    margin: 1px;
+    border-radius: 5px;
+    font-family: 'Nunito', sans-serif;
+}
+
+.calc__display{
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    border: solid black 1px;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 1vh;
+    font-size: 7vh;
+    background-color: white; 
 }
 
 .calc__button{
-    border: solid red; 
+    align-items: center;
+    justify-content: center;
+    border: solid #0F3BAA 1px; 
     text-align: center;
+    font-size: 4vh;
 }
 
-.dis{grid-area: dis;}
+.calc__zero{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
 
-.ac{grid-area: ac;}
-.del{grid-area: del;}
-.pos-neg{grid-area: pos-neg;}
-.divi{grid-area: divi;}
+/*** COLORS ***/
 
-.sev{grid-area: sev;}
-.eight{grid-area: eight;}
-.nine{grid-area: nine;}
-.ex{grid-area: ex;}
+.bkgd{
+    background-color: hsl(222, 43%, 61%);
+}
 
-.four{grid-area: four;}
-.five{grid-area: five;}
-.six{grid-area: six;}
-.minus{grid-area: minus;}
+.light{
+    background-color: #FFFFFF;
+}
 
-.one{grid-area: one;}
-.two{grid-area: two;}
-.three{grid-area: three;}
-.plus{grid-area: plus;}
+.darker{
+    background-color: #d9d9d9;
+}
 
-.zilch{grid-area: zilch;}
-.deci{grid-area: deci;}
-.equals{grid-area: equals;}
+.accent{
+    background-color:#fdaa00;
+}
+
+.accent-light{
+    background-color: #C8E6C9;
+}
+
+/***HOVERS***/
+
+.light:hover{
+    background-color: #d9d9d9;
+}
+
+.darker:hover{
+    background-color: #f2f2f2;
+}
+
+.accent:hover{
+    background-color:#eb9c00;
+}
+
+.accent-light:hover{
+    background-color: #a4d6a5;
+}
+
+/***MOBILE***/
+
+@media only screen and (max-device-width: 828px) {
+    @media (hover: none) {
+        .darker:hover{color: inherit;}
+        .accent:hover{color: inherit;}
+        .accent-light:hover{color: inherit;}
+      }
+}
