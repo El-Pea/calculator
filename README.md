@@ -18,6 +18,7 @@ Next Features:</br>
 4. ~~Make equals do the last operation and value entered~~
 5. ~~Make every operator press but the first equals() and display() until AC~~
 6. ~~Make posNeg functional~~ 
+7. Highlight selected operator button when it is pressed and disable it on next number press
 
 Bugs</br>
 1. ~~Decimal point doesn't display until decimal pressed.~~
